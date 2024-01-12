@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // display description of application and any other useful information
 function About() {

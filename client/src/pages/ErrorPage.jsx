@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // display error message if user attempts to reach nonexistent endpoint
 function ErrorPage() {

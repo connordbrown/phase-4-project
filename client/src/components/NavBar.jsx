@@ -1,7 +1,7 @@
 // enable links to other pages and .active styling
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 // styling for NavBar
-import './styling/NavBar.css';
+import './styling/NavBar.css'
 
 // create nav bar multiple endpoints
 function NavBar() {
