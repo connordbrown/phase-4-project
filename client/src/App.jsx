@@ -7,17 +7,23 @@ import About from './pages/About'
 import ErrorPage from './pages/ErrorPage'
 
 function App() {
-
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='*' element={<ErrorPage />} />
-      </Routes>
-      <h1>Vite + React</h1>
-    </BrowserRouter>
+    <main>   
+      <BrowserRouter>
+        <div className='row'>
+          <h1>myApp</h1>
+          <NavBar />
+        </div>
+        <div className='content'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </main>
+
   )
 }
 

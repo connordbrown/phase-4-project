@@ -3,20 +3,24 @@
     display: inline-block;
     box-sizing: border-box;
     border: 1px solid black;
-    width: 82px;
+    width: 88px;
     padding: 5px;
-    margin: 6px 6px 6px;
-    background: lightblue;
+    margin: 6px 6px 6px 6px;
+    background: lightgoldenrodyellow;
     text-decoration: none;
     text-align: center;
     font-size: min(10vw, 15px) ;
     color: black;
+    border-radius: 5px;
 }
 
 /* NavBar background */
 .nav-container {
-    background-color: lightsalmon;
-    width: 285px;
+    background-color: lightblue;
+    width: 200px;
+    height: 50px;
+    margin: 22px;
+    border-radius: 5px;
 }
 
 /* changes color of Navbar navlinks when they are clicked */
