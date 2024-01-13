@@ -1,25 +1,19 @@
 .form-container {
     display: flex;
     box-sizing: border-box;
-    border: 2px solid black;
-    width: 360px;
+    border: 2px solid grey;
+    width: 370px;
+    margin-top: 20px;
 }
 
 .form-inputs {
     display: flex;
-    align-items: center;
 }
 
 .form-inputs input {
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
-}
-
-.form-inputs label {
-    text-align: right;
-    margin-right: 10px;
-    flex-basis: 30%;
 }
 
 .form-inputs p {

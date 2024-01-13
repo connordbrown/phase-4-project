@@ -30,9 +30,10 @@ function SignUpForm() {
 
     return (
         <div>
-            <h2>User Sign Up Form</h2>
+     
             <div className='form-container'>
-                <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
+                <form id='signup-form' onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
+                <label for='name'>New User Sign Up:</label>
                     <div className='form-inputs'>
                         <br />
                         <input
