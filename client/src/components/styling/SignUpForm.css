@@ -5,4 +5,24 @@
 
 .form-inputs input{
     margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.form-inputs label {
+    text-align: right;
+    margin-right: 10px;
+    flex-basis: 15%;
+}
+
+.form-inputs p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#button {
+    display: grid;
+    margin-top: 5px;
+    width: 147px;
+    margin-left: 103px
 }

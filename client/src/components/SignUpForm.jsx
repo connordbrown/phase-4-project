@@ -26,11 +26,11 @@ function SignUpForm() {
 
     return (
         <div>
-            <h1>User Sign Up Form</h1>
+            <h2>User Sign Up Form</h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
-                <label htmlFor='name'>Name</label>
-                <br />
                 <div className='form-inputs'>
+                    <label htmlFor='name'>Name:</label>
+                    <br />
                     <input
                         id='name'
                         name='name'
@@ -40,9 +40,9 @@ function SignUpForm() {
                     />
                     <p style={{ color: 'red' }}> {formik.errors.name}</p>
                 </div>
-                <label htmlFor='age'>Age</label>
-                <br />
                 <div className='form-inputs'>
+                    <label htmlFor='age'>Age:</label>
+                    <br />
                     <input
                         id='age'
                         name='age'
@@ -52,9 +52,9 @@ function SignUpForm() {
                     />
                     <p style={{ color: 'red' }}> {formik.errors.age}</p>
                 </div>
-                <label htmlFor='email'>Email</label>
-                <br />
                 <div className='form-inputs'>
+                    <label htmlFor='email'>Email:</label>
+                    <br />
                     <input
                         id='email'
                         name='email'
@@ -64,9 +64,9 @@ function SignUpForm() {
                     />
                     <p style={{ color: 'red' }}> {formik.errors.email}</p>
                 </div>
-                <label htmlFor='password'>Password</label>
-                <br />
                 <div className='form-inputs'>
+                    <label htmlFor='password'>Password:</label>
+                    <br />
                     <input
                         id='password'
                         name='password'
@@ -76,7 +76,9 @@ function SignUpForm() {
                     />
                     <p style={{ color: 'red' }}> {formik.errors.password}</p>
                 </div>
-                <button type='submit'>Submit</button>
+                <div id='button'>
+                    <button type='submit'>Submit</button>
+                </div>
             </form>
         </div>
     )
