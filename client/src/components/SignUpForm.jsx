@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import './styling/SignUpForm.css';
 
 function SignUpForm() {
     const [users, setUsers] = useState([{}]);
@@ -29,44 +30,52 @@ function SignUpForm() {
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
                 <label htmlFor='name'>Name</label>
                 <br />
-                <input
-                    id='name'
-                    name='name'
-                    placeholder='Enter your name'
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                />
-                <p style={{ color: 'red' }}> {formik.errors.name}</p>
+                <div className='form-inputs'>
+                    <input
+                        id='name'
+                        name='name'
+                        placeholder='user name'
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                    />
+                    <p style={{ color: 'red' }}> {formik.errors.name}</p>
+                </div>
                 <label htmlFor='age'>Age</label>
                 <br />
-                <input
-                    id='age'
-                    name='age'
-                    placeholder='Enter your age'
-                    onChange={formik.handleChange}
-                    value={formik.values.age}
-                />
-                <p style={{ color: 'red' }}> {formik.errors.age}</p>
+                <div className='form-inputs'>
+                    <input
+                        id='age'
+                        name='age'
+                        placeholder='user age'
+                        onChange={formik.handleChange}
+                        value={formik.values.age}
+                    />
+                    <p style={{ color: 'red' }}> {formik.errors.age}</p>
+                </div>
                 <label htmlFor='email'>Email</label>
                 <br />
-                <input
-                    id='email'
-                    name='email'
-                    placeholder='Enter your email'
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                />
-                <p style={{ color: 'red' }}> {formik.errors.email}</p>
+                <div className='form-inputs'>
+                    <input
+                        id='email'
+                        name='email'
+                        placeholder='user email'
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    <p style={{ color: 'red' }}> {formik.errors.email}</p>
+                </div>
                 <label htmlFor='password'>Password</label>
                 <br />
-                <input
-                    id='password'
-                    name='password'
-                    placeholder='Enter a password'
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                />
-                <p style={{ color: 'red' }}> {formik.errors.password}</p>
+                <div className='form-inputs'>
+                    <input
+                        id='password'
+                        name='password'
+                        placeholder='user password'
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    <p style={{ color: 'red' }}> {formik.errors.password}</p>
+                </div>
                 <button type='submit'>Submit</button>
             </form>
         </div>
