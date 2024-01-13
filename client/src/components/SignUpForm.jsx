@@ -1,9 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
+import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 function SignUpForm() {
+    const [users, setUsers] = useState([{}]);
+    const [refreshPage, setRefreshPage] = useState(false);
 
+    const formSchema = yup.object().shape({
+        name: yup.string().required("Must enter a name").max(15),
+        age: yup.number().positive().integer().required("Must enter age").typeError("Please enter an integer").max(125),
+        email: yup.string().email("Invalid email").required("Must enter email"),
+        password: yup.string().required("Must enter a password")
+    })
+
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            age: "",
+            email: "",
+            password: "",
+        },
+        validationSchema: formSchema,
+    })
 
     return (
         <div>
@@ -14,6 +32,7 @@ function SignUpForm() {
                 <input
                     id='name'
                     name='name'
+                    placeholder='Enter your name'
                     onChange={formik.handleChange}
                     value={formik.values.name}
                 />
@@ -23,6 +42,7 @@ function SignUpForm() {
                 <input
                     id='age'
                     name='age'
+                    placeholder='Enter your age'
                     onChange={formik.handleChange}
                     value={formik.values.age}
                 />
@@ -32,6 +52,7 @@ function SignUpForm() {
                 <input
                     id='email'
                     name='email'
+                    placeholder='Enter your email'
                     onChange={formik.handleChange}
                     value={formik.values.email}
                 />
@@ -41,6 +62,7 @@ function SignUpForm() {
                 <input
                     id='password'
                     name='password'
+                    placeholder='Enter a password'
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />

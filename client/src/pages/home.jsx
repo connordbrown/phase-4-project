@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import SignUpForm from '../components/SignUpForm';
 
 function Home() {
 
@@ -14,7 +15,7 @@ function Home() {
                 {/* Users go here! Include links to see comments/posts by user */}
             </ul>
             <hr />
-            {/* User signup goes here! */}
+            <SignUpForm />
         </div>
     )
 }
