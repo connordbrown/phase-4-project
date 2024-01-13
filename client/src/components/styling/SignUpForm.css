@@ -1,9 +1,14 @@
+.form-container {
+    border: 2px solid black;
+    width: 80%;
+}
+
 .form-inputs {
     display: flex;
     align-items: center;
 }
 
-.form-inputs input{
+.form-inputs input {
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -12,17 +17,24 @@
 .form-inputs label {
     text-align: right;
     margin-right: 10px;
-    flex-basis: 15%;
+    flex-basis: 30%;
 }
 
 .form-inputs p {
     margin-top: 0px;
     margin-bottom: 0px;
+    font-size: small;
+    color: red;
 }
 
 #button {
-    display: grid;
-    margin-top: 5px;
-    width: 147px;
-    margin-left: 103px
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 181px;
+    margin-left: 154px;
+}
+
+#button button {
+    width: 100%;  
 }
