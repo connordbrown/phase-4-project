@@ -1,6 +1,8 @@
 .form-container {
+    display: flex;
+    box-sizing: border-box;
     border: 2px solid black;
-    width: 80%;
+    width: 360px;
 }
 
 .form-inputs {
@@ -29,12 +31,5 @@
 
 #button {
     display: flex;
-    align-items: center;
     margin-top: 10px;
-    margin-right: 181px;
-    margin-left: 154px;
-}
-
-#button button {
-    width: 100%;  
 }

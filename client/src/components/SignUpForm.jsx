@@ -34,7 +34,6 @@ function SignUpForm() {
             <div className='form-container'>
                 <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
                     <div className='form-inputs'>
-                        <label htmlFor='name'>Name:</label>
                         <br />
                         <input
                             id='name'
@@ -46,7 +45,6 @@ function SignUpForm() {
                         <p>{formik.errors.name}</p>
                     </div>
                     <div className='form-inputs'>
-                        <label htmlFor='age'>Age:</label>
                         <br />
                         <input
                             id='age'
@@ -58,7 +56,6 @@ function SignUpForm() {
                         <p>{formik.errors.age}</p>
                     </div>
                     <div className='form-inputs'>
-                        <label htmlFor='email'>Email:</label>
                         <br />
                         <input
                             id='email'
@@ -70,7 +67,6 @@ function SignUpForm() {
                         <p>{formik.errors.email}</p>
                     </div>
                     <div className='form-inputs'>
-                        <label htmlFor='password'>Password:</label>
                         <br />
                         <input
                             id='password'
