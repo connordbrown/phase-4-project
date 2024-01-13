@@ -11,7 +11,7 @@ function Home() {
             <hr />
             <h2>Users</h2>
             <ul>
-                {/* Users go here! Include links to see comments/posts */}
+                {/* Users go here! Include links to see comments/posts by user */}
             </ul>
             <hr />
             {/* User signup goes here! */}
