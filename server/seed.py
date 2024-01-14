@@ -46,4 +46,3 @@ if __name__ == "__main__":
 
     db.session.commit()
     print("Complete.")
-    # remove pass and write your seed data

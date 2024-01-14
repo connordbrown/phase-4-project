@@ -14,13 +14,12 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
 
-    def __repr__(self):
-        return f'User: {self.username}, ID: {self.id}'
-
     @validates('username')
     def validate_username(self, key, username):
         if not username:
             raise ValueError("User must have a username")
+        if User.query.filter(User.username == username).first():
+            raise ValueError(f"Username '{username}' is already taken")
         return username
     
     @validates('age')
@@ -35,4 +34,9 @@ class User(db.Model, SerializerMixin):
     def validate_email(self, key, email):
         if ('@' and '.') not in email:
             raise ValueError("User must have valid email")
+        if User.query.filter(User.email == email).first():
+            raise ValueError(f"Email '{email}' is already taken")
         return email
+
+    def __repr__(self):
+        return f'User: {self.username}, ID: {self.id}'
