@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import NavBar from './components/NavBar'
+import React, { useState } from 'react';
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import About from './pages/About';
 import ErrorPage from './pages/ErrorPage';
