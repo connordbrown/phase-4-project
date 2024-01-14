@@ -1,5 +1,7 @@
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.orm import validates
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from config import db, bcrypt
 
@@ -14,3 +16,23 @@ class User(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'User: {self.username}, ID: {self.id}'
+
+    @validates('username')
+    def validate_username(self, key, username):
+        if not username:
+            raise ValueError("User must have a username")
+        return username
+    
+    @validates('age')
+    def validate_age(self, key, age):
+        if not age:
+            raise ValueError("User must have an age")
+        if not (10 <= age <= 120):
+            raise ValueError("User age must be between ages of 10 and 120 years")
+        return age
+    
+    @validates('email')
+    def validate_email(self, key, email):
+        if ('@' and '.') not in email:
+            raise ValueError("User must have valid email")
+        return email

@@ -1,4 +1,4 @@
-from config import app
+from config import app, db, api
 from models import User
 
 if __name__ == "__main__":
