@@ -18,7 +18,7 @@
 .nav-container {
     background-color: lightblue;
     width: fit-content;
-    height: 50px;
+    height: fit-content;
     margin: 22px;
     border-radius: 5px;
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Home from './pages/Home';
+import Home from './pages/home'; // interpreter has issue with casing
 import About from './pages/About';
 import SignUp from './pages/SignUp';
 import ErrorPage from './pages/ErrorPage';

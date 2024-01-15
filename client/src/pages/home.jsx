@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginForm from '../components/LoginForm';
 
 function Home({ users }) {
   return (
@@ -20,6 +21,7 @@ function Home({ users }) {
     </ul>
     <hr />
     <h2>Log In</h2>
+    <LoginForm />
     </div>
   )
 }
