@@ -50,5 +50,17 @@ class Users(Resource):
   
 api.add_resource(Users, '/users')
 
+class Login(Resource):
+    def post(self):
+        if user := User.query.filter(User.username == request.json.get('username')).first():
+            if user.authenticate(request.json.get('password')):
+                session['user_id'] = user.id
+                return user.to_dict(), 200
+            return {'error': '401: Invalid Password'}, 401
+        return {'error': '401: Invalid Username'}, 401
+
+api.add_resource(Login, '/login')
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
