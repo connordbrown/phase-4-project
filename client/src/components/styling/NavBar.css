@@ -3,7 +3,7 @@
     display: inline-block;
     box-sizing: border-box;
     border: 1px solid black;
-    width: 88px;
+    width: 100px;
     padding: 5px;
     margin: 6px 6px 6px 6px;
     background: lightgoldenrodyellow;
@@ -17,7 +17,7 @@
 /* NavBar background */
 .nav-container {
     background-color: lightblue;
-    width: 200px;
+    width: fit-content;
     height: 50px;
     margin: 22px;
     border-radius: 5px;

@@ -1,20 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import SignUpForm from '../components/SignUpForm';
+import React from 'react';
 
-function Home() {
-  const [users, setUsers] = useState([])
-
-  useEffect(() => {
-    fetch("/api/users")
-    .then(response => response.json())
-    .then(data => setUsers(data))
-  }, [])
-
-  function handleAddUser(newUser) {
-    const updatedUsers = [...users, newUser]
-    setUsers(updatedUsers);
-  }
-
+function Home({ users }) {
   return (
     <div>
     <h2>Posts</h2>
@@ -33,7 +19,7 @@ function Home() {
     ))}
     </ul>
     <hr />
-    <SignUpForm onAddUser={handleAddUser} />
+    <h2>Log In</h2>
     </div>
   )
 }
