@@ -16,13 +16,16 @@ class Users(Resource):
     
     def post(self):
         username = request.json.get('username')
-        age = request.json.get('age')
+        # age received as string - must convert to int
+        age = int(request.json.get('age'))
         email = request.json.get('email')
         password = request.json.get('password')
 
         if not username or not age or not email or not password:
             return make_response({'errors': ['validation errors']}, 400)
-        if not (10 <= int(age) <= 120):
+        if not isinstance(age, int):
+            return make_response({'errors': ['validation errors']}, 400)
+        if not (10 <= age <= 120):
             return make_response({'errors': ['validation errors']}, 400)
         if ('@' or '.') not in email:
             return make_response({'errors': ['validation errors']}, 400)

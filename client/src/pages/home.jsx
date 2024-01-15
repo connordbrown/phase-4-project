@@ -10,6 +10,11 @@ function Home() {
     .then(data => setUsers(data))
   }, [])
 
+  function handleAddUser(newUser) {
+    const updatedUsers = [...users, newUser]
+    setUsers(updatedUsers);
+  }
+
   return (
     <div>
     <h2>Posts</h2>
@@ -28,7 +33,7 @@ function Home() {
     ))}
     </ul>
     <hr />
-    <SignUpForm />
+    <SignUpForm onAddUser={handleAddUser} />
     </div>
   )
 }

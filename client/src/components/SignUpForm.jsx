@@ -3,12 +3,10 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import './styling/SignUpForm.css';
 
-function SignUpForm() {
-    const [users, setUsers] = useState([{}]);
-    const [refreshPage, setRefreshPage] = useState(false);
+function SignUpForm( { onAddUser }) {
 
     const formSchema = yup.object().shape({
-        name: yup.string().required("Must enter a name").max(15),
+        username: yup.string().required("Must enter a username").max(15),
         age: yup.number().positive().integer().required("Must enter an age").typeError("Please enter an integer").max(125),
         email: yup.string().email("Invalid email").required("Must enter an email"),
         password: yup.string().required("Must enter a password")
@@ -16,16 +14,26 @@ function SignUpForm() {
 
     const formik = useFormik({
         initialValues: {
-            name: "",
+            username: "",
             age: "",
             email: "",
             password: "",
         },
         validationSchema: formSchema,
-        onSubmit: (values) => {
-            // Handle form submission
-            console.log(values);
-          },   
+        onSubmit: (values, { resetForm }) => {
+            fetch("/api/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(values, null, 2)
+            })
+            .then(response => response.json())
+            .then(newUser => onAddUser(newUser))
+            
+            resetForm();
+        }   
     })
 
     return (
@@ -33,15 +41,15 @@ function SignUpForm() {
      
             <div className='form-container'>
                 <form id='signup-form' onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
-                <label for='name'>New User Sign Up:</label>
+                <label htmlFor='username'>New User Sign Up:</label>
                     <div className='form-inputs'>
                         <br />
                         <input
-                            id='name'
-                            name='name'
-                            placeholder='user name'
+                            id='username'
+                            name='username'
+                            placeholder='username'
                             onChange={formik.handleChange}
-                            value={formik.values.name}
+                            value={formik.values.username}
                         />
                         <p>{formik.errors.name}</p>
                     </div>
