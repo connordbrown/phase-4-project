@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import './styling/SignUpForm.css';
+import './styling/LoginForm.css';
 
 function LoginForm( { onLogin }) {
 
@@ -35,7 +35,7 @@ function LoginForm( { onLogin }) {
         <div>
             <div className='form-container'>
                 <form id='login-form' onSubmit={formik.handleSubmit}>
-                <label htmlFor='username'>New User Sign Up:</label>
+                <label htmlFor='username'>User Login:</label>
                     <div className='form-inputs'>
                         <br />
                         <input
@@ -53,7 +53,7 @@ function LoginForm( { onLogin }) {
                             id='password'
                             name='password'
                             type='password'
-                            placeholder='user password'
+                            placeholder='password'
                             onChange={formik.handleChange}
                             value={formik.values.password}
                         />
