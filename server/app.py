@@ -47,7 +47,6 @@ class Users(Resource):
             return make_response(new_user_data.to_dict(), 201)
         except IntegrityError:
             return make_response({'error': '422: Unprocessable Entity'}, 422)
-  
 api.add_resource(Users, '/users')
 
 class Login(Resource):
@@ -58,7 +57,6 @@ class Login(Resource):
                 return user.to_dict(), 200
             return {'error': '401: Invalid Password'}, 401
         return {'error': '401: Invalid Username'}, 401
-
 api.add_resource(Login, '/login')
 
 class Logout(Resource):
@@ -67,7 +65,6 @@ class Logout(Resource):
             session['user_id'] = None
             return {}, 204
         return {'error': '401: User not logged in'}, 401
-
 api.add_resource(Logout, '/logout')
 
 class CheckSession(Resource):
@@ -75,7 +72,6 @@ class CheckSession(Resource):
         if user := User.query.filter(User.id == session.get('user_id')).first():
             return user.to_dict(), 200
         return {'error': '401: User not logged in'}, 401
-
 api.add_resource(CheckSession, '/check_session')
 
 if __name__ == "__main__":
