@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 import './styling/Logout.css';
 
 function LogoutForm( { onLogout }) {
@@ -11,13 +9,16 @@ function LogoutForm( { onLogout }) {
         setError("");
     }, 4000);
 
+    function handleLogout() {
+    
+    }
 
     return (
         <div>
             {error ? <p style={{'color' : 'red'}}>{error}</p> : null}
             <div className='button-container'>
                 <label id='logout-label' htmlFor='logout'>User Logout:</label>
-                <button id='logout' onClick={onLogout}>Logout</button>
+                <button id='logout' onClick={handleLogout}>Logout</button>
             </div>
         </div>
     )
