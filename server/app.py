@@ -66,11 +66,17 @@ class Logout(Resource):
         if session.get('user_id'):
             session['user_id'] = None
             return {}, 204
-        return {'error': '401: Unauthorized'}, 401
+        return {'error': '401: User not logged in'}, 401
 
 api.add_resource(Logout, '/logout')
 
+class CheckSession(Resource):
+    def get(self):
+        if user := User.query.filter(User.id == session.get('user_id')).first():
+            return user.to_dict(), 200
+        return {'error': '401: User not logged in'}, 401
 
+api.add_resource(CheckSession, '/check_session')
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
