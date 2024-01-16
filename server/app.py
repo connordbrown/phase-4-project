@@ -37,7 +37,7 @@ class Users(Resource):
         )
 
         # password encrypted by setter
-        new_user._password_hash = password
+        new_user.password_hash = password
 
         try:
             db.session.add(new_user)

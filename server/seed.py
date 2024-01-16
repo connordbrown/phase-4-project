@@ -33,7 +33,7 @@ if __name__ == "__main__":
         age=fake.random_int(min=10, max=120),
         email=email,
       )
-      user._password_hash = username + 'password'
+      user.password_hash = user.username + 'password'
 
       users.append(user)
 
