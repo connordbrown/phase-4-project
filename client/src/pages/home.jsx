@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from '../components/LoginForm';
+import LogoutForm from '../components/Logout';
 
 function Home({ users }) {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ function Home({ users }) {
             <h2>Log In</h2>
             {loggedIn ? <p style={{'color': 'green'}}>LOGGED IN: {currentUser.username}</p> : <p style={{'color': 'red'}}>LOGGED OUT</p>}
             <LoginForm onLogin={handleLogin}/>
+            <LogoutForm />
         </div>
     )
     }

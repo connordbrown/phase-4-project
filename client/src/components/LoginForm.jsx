@@ -6,6 +6,7 @@ import './styling/LoginForm.css';
 function LoginForm( { onLogin }) {
     const [error, setError] = useState("");
 
+    // error in response disappears after time interval
     setTimeout(() => {
         setError("");
     }, 4000);

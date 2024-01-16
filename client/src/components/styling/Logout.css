@@ -1,0 +1,19 @@
+.button-container {
+    display: flex;
+    box-sizing: border-box;
+    border: 2px solid grey;
+    width: 370px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#logout {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 170px
+}
+
+#logout-label {
+    margin: 20px 10px 20px 40px;
+    width: 110px;
+}
