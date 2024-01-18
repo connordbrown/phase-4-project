@@ -11,6 +11,11 @@ function Home({ users }) {
         setLoggedIn(true);
     }
   
+    function handleLogout() {
+        setCurrentUser(null)
+        setLoggedIn(false);   
+    }
+
     return (
         <div>
             <h2>Posts</h2>
@@ -31,8 +36,8 @@ function Home({ users }) {
             <hr />
             <h2>Log In</h2>
             {loggedIn ? <p style={{'color': 'green'}}>LOGGED IN: {currentUser.username}</p> : <p style={{'color': 'red'}}>LOGGED OUT</p>}
-            <LoginForm onLogin={handleLogin}/>
-            <LogoutForm />
+            <LoginForm onLogin={handleLogin} />
+            <LogoutForm onLogout={handleLogout} />
         </div>
     )
     }

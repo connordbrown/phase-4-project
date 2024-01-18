@@ -4,11 +4,11 @@ import * as yup from 'yup';
 import './styling/LoginForm.css';
 
 function LoginForm( { onLogin }) {
-    const [error, setError] = useState("");
+    const [loginError, setLoginError] = useState("");
 
     // error in response disappears after time interval
     setTimeout(() => {
-        setError("");
+        setLoginError("");
     }, 4000);
 
     const formSchema = yup.object().shape({
@@ -44,7 +44,7 @@ function LoginForm( { onLogin }) {
 
     return (
         <div>
-            {error ? <p style={{'color' : 'red'}}>{error}</p> : null}
+            {loginError ? <p style={{'color' : 'red'}}>{loginError}</p> : null}
             <div className='form-container'>
                 <form id='login-form' onSubmit={formik.handleSubmit}>
                 <label htmlFor='username'>User Login:</label>
