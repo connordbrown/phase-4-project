@@ -18,6 +18,9 @@ class User(db.Model, SerializerMixin):
     # relationship mapping user to related posts
     posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
 
+    # rules to prevent recursion error
+    serialize_rules = ('-posts.user',)
+
     @validates('username')
     def validate_username(self, key, username):
         if not username:
@@ -70,6 +73,9 @@ class Post(db.Model, SerializerMixin):
 
     # relationship mapping the post to related user
     user = db.relationship('User', back_populates='posts')
+
+    # rules to prevent recursion error
+    serialize_rules = ('-user.posts',)
 
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
