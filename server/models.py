@@ -15,6 +15,9 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
 
+    # relationship mapping user to related posts
+    posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
+
     @validates('username')
     def validate_username(self, key, username):
         if not username:
@@ -64,6 +67,9 @@ class Post(db.Model, SerializerMixin):
     date_posted = db.Column(db.DateTime, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    # relationship mapping the post to related user
+    user = db.relationship('User', back_populates='posts')
 
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
