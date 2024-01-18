@@ -35,7 +35,7 @@ function LoginForm( { onLogin }) {
                 if (response.ok) {
                     response.json().then(user => onLogin(user));
                 } else {
-                    response.json().then(err => setError(err.error));
+                    response.json().then(err => setLoginError(err.error));
                 }
             })
             resetForm();       

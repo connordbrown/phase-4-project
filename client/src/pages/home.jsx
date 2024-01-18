@@ -46,7 +46,7 @@ function Home({ users }) {
             ))}
             </ul>
             <hr />
-            <h2>Log In</h2>
+            <h2>{loggedIn ? "Log Out" : "Log In"}</h2>
             {loggedIn ? <p style={{'color': 'green'}}>LOGGED IN: {currentUser.username}</p> : <p style={{'color': 'red'}}>LOGGED OUT</p>}
             {loggedIn ? <LogoutForm onLogout={handleLogout} /> : <LoginForm onLogin={handleLogin} />}  
         </div>
