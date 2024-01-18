@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from '../components/LoginForm';
 import LogoutForm from '../components/Logout';
 
@@ -15,6 +15,18 @@ function Home({ users }) {
         setCurrentUser(null)
         setLoggedIn(false);   
     }
+
+    // make else more useful!
+    useEffect(() => {
+        fetch("/api/check_session")
+        .then(response => {
+            if (response.ok) {
+                response.json().then(user => handleLogin(user))
+            } else {
+                response.json().then(err => console.log(err.error))
+            }
+        })
+    }, [])
 
     return (
         <div>
@@ -36,8 +48,7 @@ function Home({ users }) {
             <hr />
             <h2>Log In</h2>
             {loggedIn ? <p style={{'color': 'green'}}>LOGGED IN: {currentUser.username}</p> : <p style={{'color': 'red'}}>LOGGED OUT</p>}
-            <LoginForm onLogin={handleLogin} />
-            <LogoutForm onLogout={handleLogout} />
+            {loggedIn ? <LogoutForm onLogout={handleLogout} /> : <LoginForm onLogin={handleLogin} />}  
         </div>
     )
     }

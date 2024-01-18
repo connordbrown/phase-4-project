@@ -19,9 +19,9 @@ function LogoutForm( { onLogout }) {
         })
         .then(response => {
             if (response.ok) {
-                onLogout()
+                onLogout();
             } else {
-                response.json().then(err => setLogoutError(err.error))
+                response.json().then(err => setLogoutError(err.error));
             }
         })
     }
