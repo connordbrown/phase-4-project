@@ -5,6 +5,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 
 from config import db, bcrypt
 
+### User Model ###
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
@@ -52,3 +53,17 @@ class User(db.Model, SerializerMixin):
     
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
+    
+### Post Model ###
+class Post(db.Model, SerializerMixin):
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    content = db.Column(db.String, nullable=False)
+    date_posted = db.Column(db.Date, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f'<Post {self.id}, {self.title}, {self.date_posted}>'
