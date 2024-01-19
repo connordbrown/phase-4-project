@@ -29,7 +29,7 @@ function App() {
         }
     })
   }, [])
-
+  
   function handleAddUser(newUser) {
     const updatedUsers = [...users, newUser]
     setUsers(updatedUsers);
