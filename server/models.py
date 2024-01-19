@@ -96,6 +96,14 @@ class Post(db.Model, SerializerMixin):
             raise ValueError("Post must have a date")
         return date_posted
     
+    @validates('user_id')
+    def validate_user_id(self, key, user_id):
+        if not user_id:
+            raise ValueError("Post must have a user id")
+        if not User.query.filter(User.id == user_id).first():
+            raise ValueError("Post must have an existing user id")
+        return user_id
+    
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
 
