@@ -69,7 +69,7 @@ class Post(db.Model, SerializerMixin):
     content = db.Column(db.String, nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     # relationship mapping the post to related user
     user = db.relationship('User', back_populates='posts')
@@ -79,3 +79,4 @@ class Post(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
+
