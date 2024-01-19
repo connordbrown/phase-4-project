@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     for i in range(10):
       title = fake.sentence(nb_words=5)
-      content = fake.paragraph(nb_sentences=2)
+      content = fake.paragraph(nb_sentences=2) + fake.emoji()
       timestamp = fake.date_time_between(start_date, end_date)
       user_id = fake.random_int(min=1, max=10)
 

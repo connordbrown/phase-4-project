@@ -111,6 +111,12 @@ class Posts(Resource):
             return make_response({'error': '422 Unprocessable Entity'}, 422)
 api.add_resource(Posts, '/posts')
 
+class PostByID(Resource):
+    def get(self, id):
+        post = Post.query.filter(Post.id == id).first()
+        return make_response(post.to_dict(), 200)
+api.add_resource(PostByID, '/posts/<int:id>')
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
