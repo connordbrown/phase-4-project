@@ -82,7 +82,7 @@ class Posts(Resource):
     
     def post(self):
         title = request.json.get('title')
-        content = request.json.get('content')
+        content = request.json.get('content')       ### ADD AUTHORIZATION for POST
         timestamp = datetime.now()
         # id from logged in user
         user_id = session.get('user_id')
