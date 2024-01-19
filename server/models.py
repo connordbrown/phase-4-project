@@ -105,5 +105,5 @@ class Post(db.Model, SerializerMixin):
         return user_id
     
     def __repr__(self):
-        return f'<Post {self.id}, {self.title}, {self.date_posted}>'
+        return f'<Post {self.id}, {self.title}, {self.timestamp}>'
 
