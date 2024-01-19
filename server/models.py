@@ -67,7 +67,7 @@ class Post(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     content = db.Column(db.String, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
 
     # foreign key to associate posts to a user - no unassociated posts allowed
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

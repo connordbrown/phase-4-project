@@ -53,19 +53,19 @@ if __name__ == "__main__":
     for i in range(10):
       title = fake.sentence(nb_words=5)
       content = fake.paragraph(nb_sentences=2)
-      date_posted = fake.date_time_between(start_date, end_date)
+      timestamp = fake.date_time_between(start_date, end_date)
       user_id = fake.random_int(min=1, max=10)
 
       post = Post(
         title=title,
         content=content,
-        date_posted=date_posted,
+        timestamp=timestamp,
         user_id=user_id,
       )
 
       posts.append(post)
 
-    sorted_posts = sorted(posts, key=lambda x: x.date_posted)
+    sorted_posts = sorted(posts, key=lambda x: x.timestamp)
     db.session.add_all(sorted_posts)
 
 
