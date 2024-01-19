@@ -48,6 +48,7 @@ function SignUpForm( { onAddUser }) {
                             placeholder='username'
                             onChange={formik.handleChange}
                             value={formik.values.username}
+                            autoComplete='on'
                         />
                         <p>{formik.errors.username}</p>
                     </div>
@@ -59,6 +60,7 @@ function SignUpForm( { onAddUser }) {
                             placeholder='user age'
                             onChange={formik.handleChange}
                             value={formik.values.age}
+                            autoComplete='on'
                         />
                         <p>{formik.errors.age}</p>
                     </div>
@@ -70,6 +72,7 @@ function SignUpForm( { onAddUser }) {
                             placeholder='user email'
                             onChange={formik.handleChange}
                             value={formik.values.email}
+                            autoComplete='on'
                         />
                         <p>{formik.errors.email}</p>
                     </div>
@@ -82,6 +85,7 @@ function SignUpForm( { onAddUser }) {
                             placeholder='user password'
                             onChange={formik.handleChange}
                             value={formik.values.password}
+                            autoComplete='off'
                         />
                         <p>{formik.errors.password}</p>
                     </div>

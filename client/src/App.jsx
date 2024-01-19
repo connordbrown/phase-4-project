@@ -9,6 +9,8 @@ import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const [users, setUsers] = useState([])
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     fetch("/api/users")
@@ -16,9 +18,31 @@ function App() {
     .then(data => setUsers(data))
   }, [])
 
+  // make else more useful!
+  useEffect(() => {
+    fetch("/api/check_session")
+    .then(response => {
+        if (response.ok) {
+            response.json().then(user => handleLogin(user))
+        } else {
+            response.json().then(err => console.log(err.error))
+        }
+    })
+  }, [])
+
   function handleAddUser(newUser) {
     const updatedUsers = [...users, newUser]
     setUsers(updatedUsers);
+  }
+
+  function handleLogin(user) {
+      setCurrentUser(user);
+      setLoggedIn(true);
+  }
+
+  function handleLogout() {
+      setCurrentUser(null)
+      setLoggedIn(false);   
   }
 
   return (
@@ -30,7 +54,7 @@ function App() {
         </div>
         <div className='content'>
           <Routes>
-            <Route path='/' element={<Home users={users} />} />
+            <Route path='/' element={<Home users={users} currentUser={currentUser} loggedIn={loggedIn} onLogin={handleLogin} onLogout={handleLogout} />} />
             <Route path='/about' element={<About />} />
             <Route path='/signup' element={<SignUp onAddUser={handleAddUser} />} />
             <Route path='*' element={<ErrorPage />} />

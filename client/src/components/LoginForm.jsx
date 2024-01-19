@@ -56,6 +56,7 @@ function LoginForm( { onLogin }) {
                             placeholder='username'
                             onChange={formik.handleChange}
                             value={formik.values.username}
+                            autoComplete='on'
                         />
                         <p>{formik.errors.username}</p>
                     </div>
@@ -68,6 +69,7 @@ function LoginForm( { onLogin }) {
                             placeholder='password'
                             onChange={formik.handleChange}
                             value={formik.values.password}
+                            autoComplete='off'
                         />
                         <p>{formik.errors.password}</p>
                     </div>
