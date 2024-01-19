@@ -69,6 +69,7 @@ class Post(db.Model, SerializerMixin):
     content = db.Column(db.String, nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False)
 
+    # foreign key to associate posts to a user - no unassociated posts allowed
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     # relationship mapping the post to related user
@@ -76,6 +77,12 @@ class Post(db.Model, SerializerMixin):
 
     # rules to prevent recursion error
     serialize_rules = ('-user.posts',)
+
+    @validates('title')
+    def validate_title(self, key, title):
+        if not title:
+            raise ValueError("Post must have a title")
+        return title
 
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
