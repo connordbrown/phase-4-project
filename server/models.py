@@ -89,7 +89,13 @@ class Post(db.Model, SerializerMixin):
         if not content:
             raise ValueError("Post must have content")
         return content
-
+    
+    @validates('date_posted')
+    def validate_date_posted(self, key, date_posted):
+        if not date_posted:
+            raise ValueError("Post must have a date")
+        return date_posted
+    
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
 

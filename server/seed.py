@@ -1,5 +1,5 @@
 from faker import Faker
-import datetime
+from datetime import datetime
 
 from config import app, db
 from models import User, Post
@@ -47,8 +47,8 @@ if __name__ == "__main__":
     print("Creating posts...")
     posts = []
 
-    start_date = datetime.datetime(2024, 1, 1, 14, 24, 32)
-    end_date = datetime.datetime(2024, 1, 18, 20, 46, 51)
+    start_date = datetime(2024, 1, 1, 14, 24, 32)
+    end_date = datetime(2024, 1, 18, 20, 46, 51)
 
     for i in range(10):
       title = fake.sentence(nb_words=5)
