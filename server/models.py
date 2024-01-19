@@ -83,6 +83,12 @@ class Post(db.Model, SerializerMixin):
         if not title:
             raise ValueError("Post must have a title")
         return title
+    
+    @validates('content')
+    def validate_content(self, key, content):
+        if not content:
+            raise ValueError("Post must have content")
+        return content
 
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.date_posted}>'
