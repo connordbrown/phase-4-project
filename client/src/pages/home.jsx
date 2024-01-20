@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import LogoutForm from '../components/Logout';
+import '../App.css';
 
-function Home({ users, currentUser, loggedIn, onLogin, onLogout }) {
+function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout }) {
 
     return (
         <div>
             <h2>Posts</h2>
             <ul>
-                {/* Posts go here! Include link to see post with comments */}
+                {posts.map(post => (
+                    <Link to={`/posts/${post.id}`} key={post.id}>
+                        <li className='posts'>
+                            <span>
+                                 {post.title} - <em>{post.user['username']}</em>
+                            </span>
+                        </li>
+                    </Link>
+                ))}
             </ul>
             <hr />
             <h2>Users</h2>
@@ -19,7 +29,7 @@ function Home({ users, currentUser, loggedIn, onLogin, onLogout }) {
                     {user.username}, age: {user.age}, email: {user.email}
                     </span>
                 </li>
-            ))}
+                ))}
             </ul>
             <hr />
             <h2>{loggedIn ? "Log Out" : "Log In"}</h2>

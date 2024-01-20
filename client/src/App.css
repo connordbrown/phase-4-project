@@ -17,3 +17,8 @@
 .content {
   margin: 10px;
 }
+
+.posts:hover span{
+  color: yellow;
+  cursor: pointer;
+}
