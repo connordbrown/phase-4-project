@@ -45,6 +45,7 @@ function SignUpForm( { onAddUser }) {
                         <input
                             id='username'
                             name='username'
+                            type='text'
                             placeholder='username'
                             onChange={formik.handleChange}
                             value={formik.values.username}
@@ -57,6 +58,7 @@ function SignUpForm( { onAddUser }) {
                         <input
                             id='age'
                             name='age'
+                            type='text'
                             placeholder='user age'
                             onChange={formik.handleChange}
                             value={formik.values.age}
@@ -69,6 +71,7 @@ function SignUpForm( { onAddUser }) {
                         <input
                             id='email'
                             name='email'
+                            type='text'
                             placeholder='user email'
                             onChange={formik.handleChange}
                             value={formik.values.email}

@@ -54,6 +54,7 @@ function PostForm( { onPost }) {
                         <input
                             id='title'
                             name='title'
+                            type='text'
                             placeholder='title'
                             onChange={formik.handleChange}
                             value={formik.values.title}
@@ -66,6 +67,7 @@ function PostForm( { onPost }) {
                         <input
                             id='content'
                             name='content'
+                            type='text'
                             placeholder='password'
                             onChange={formik.handleChange}
                             value={formik.values.content}

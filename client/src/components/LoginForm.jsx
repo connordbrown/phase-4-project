@@ -53,6 +53,7 @@ function LoginForm( { onLogin }) {
                         <input
                             id='username'
                             name='username'
+                            type='text'
                             placeholder='username'
                             onChange={formik.handleChange}
                             value={formik.values.username}
