@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import LogoutForm from '../components/Logout';
+import PostForm from '../components/PostForm';
 import '../App.css';
 
-function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout }) {
+function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout, onPost }) {
+    const [postFormVisible, setPostFormVisible] = useState(false);
+
+    function handlePostFormVisible() {
+        setPostFormVisible(true);
+    }
 
     return (
         <div>
@@ -20,6 +26,7 @@ function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout }) {
                     </Link>
                 ))}
             </ul>
+            {postFormVisible ? <PostForm onPost={onPost} /> : <button onClick={handlePostFormVisible}>Create a post</button>}
             <hr />
             <h2>Users</h2>
             <ul>

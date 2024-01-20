@@ -13,8 +13,8 @@ function PostForm( { onPost }) {
     }, 4000);
 
     const formSchema = yup.object().shape({
-        title: yup.string().required("Must enter a username").max(50),
-        content: yup.string().required("Must enter a password")
+        title: yup.string().required("Must enter a title").max(50),
+        content: yup.string().required("Must enter content")
     })
 
     const formik = useFormik({
@@ -34,9 +34,9 @@ function PostForm( { onPost }) {
             })
             .then(response => {
                 if (response.ok) {
-                    response.json().then(user => onPost(user));
+                    response.json().then(post => onPost(post));
                 } else {
-                    response.json().then(err => setLoginError(err.error));
+                    response.json().then(err => setPostError(err.error));
                 }
             })
             resetForm();       
@@ -68,12 +68,12 @@ function PostForm( { onPost }) {
                             id='content'
                             name='content'
                             type='text'
-                            placeholder='password'
+                            placeholder='content'
                             onChange={formik.handleChange}
                             value={formik.values.content}
                             autoComplete='off'
                         />
-                        <p>{formik.errors.password}</p>
+                        <p>{formik.errors.content}</p>
                     </div>
                     <div id='button'>
                         <button type='submit'>Submit</button>
@@ -84,4 +84,4 @@ function PostForm( { onPost }) {
     )
 }
 
-export default LoginForm;
+export default PostForm;

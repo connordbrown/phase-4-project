@@ -39,8 +39,13 @@ function App() {
   }, [])
   
   function handleAddUser(newUser) {
-    const updatedUsers = [...users, newUser]
+    const updatedUsers = [...users, newUser];
     setUsers(updatedUsers);
+  }
+
+  function handleAddPost(newPost) {
+    const updatedPosts = [...posts, newPost];
+    setPosts(updatedPosts);
   }
 
   function handleLogin(user) {
@@ -68,7 +73,8 @@ function App() {
                                       currentUser={currentUser}
                                       loggedIn={loggedIn} 
                                       onLogin={handleLogin} 
-                                      onLogout={handleLogout} />} 
+                                      onLogout={handleLogout}
+                                      onPost={handleAddPost} />} 
             />
             <Route path='/posts/:id' element={<PostInfo posts={posts} />} />
             <Route path='/about' element={<About />} />

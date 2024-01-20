@@ -83,7 +83,7 @@ class Posts(Resource):
     def post(self):
         # user must be logged in to create a Post
         if not session.get('user_id'):
-            return make_response({'error': '401: User not logged in'})
+            return make_response({'error': '401: User not logged in'}, 401)
         title = request.json.get('title')
         content = request.json.get('content')
         timestamp = datetime.now()
@@ -95,7 +95,7 @@ class Posts(Resource):
         if not content:
             return make_response({'errors': '400: Invalid content'}, 400)
         if not user_id:
-            return make_response({'errors': '400: Invalid user id'}, 400)
+            return make_response({'error': '400: Invalid user ID'}, 400)
         
         new_post = Post(
             title=title,
