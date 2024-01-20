@@ -22,3 +22,15 @@
   color: yellow;
   cursor: pointer;
 }
+
+.post-link:link {
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.post-link:visited {
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.post-link {
+  text-decoration: None;
+}

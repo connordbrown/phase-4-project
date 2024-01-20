@@ -11,7 +11,7 @@ function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout }) {
             <h2>Posts</h2>
             <ul>
                 {posts.map(post => (
-                    <Link to={`/posts/${post.id}`} key={post.id}>
+                    <Link to={`/posts/${post.id}`} key={post.id} className='post-link'>
                         <li className='posts'>
                             <span>
                                  {post.title} - <em>{post.user['username']}</em>
