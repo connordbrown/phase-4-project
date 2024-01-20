@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './pages/home'; // interpreter has issue with casing
+import PostInfo from './pages/PostInfo';
 import About from './pages/About';
 import SignUp from './pages/SignUp';
 import ErrorPage from './pages/ErrorPage';
@@ -69,7 +70,7 @@ function App() {
                                       onLogin={handleLogin} 
                                       onLogout={handleLogout} />} 
             />
-            <Route path='/posts/:id' />
+            <Route path='/posts/:id' element={<PostInfo posts={posts} />} />
             <Route path='/about' element={<About />} />
             <Route path='/signup' element={<SignUp onAddUser={handleAddUser} />} />
             <Route path='*' element={<ErrorPage />} />
