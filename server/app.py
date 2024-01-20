@@ -81,18 +81,21 @@ class Posts(Resource):
         return make_response(posts_dict_list, 200)
     
     def post(self):
+        # user must be logged in to create a Post
+        if not session.get('user_id'):
+            return make_response({'error': '401: User not logged in'})
         title = request.json.get('title')
-        content = request.json.get('content')       ### ADD AUTHORIZATION for POST
+        content = request.json.get('content')
         timestamp = datetime.now()
         # id from logged in user
         user_id = session.get('user_id')
 
         if not title:
-            return make_response({'errors': ['validation errors']}, 400)
+            return make_response({'error': '400: Invalid title'}, 400)
         if not content:
-            return make_response({'errors': ['validation errors']}, 400)
+            return make_response({'errors': '400: Invalid content'}, 400)
         if not user_id:
-            return make_response({'errors': ['validation errors']}, 400)
+            return make_response({'errors': '400: Invalid user id'}, 400)
         
         new_post = Post(
             title=title,
