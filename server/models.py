@@ -33,6 +33,8 @@ class User(db.Model, SerializerMixin):
     def validate_age(self, key, age):
         if not age:
             raise ValueError("User must have an age")
+        if not isinstance(age, int):
+            raise ValueError("Age must be an integer")
         if not (10 <= age <= 120):
             raise ValueError("User age must be between ages of 10 and 120 years")
         return age
@@ -100,6 +102,8 @@ class Post(db.Model, SerializerMixin):
     def validate_user_id(self, key, user_id):
         if not user_id:
             raise ValueError("Post must have a user id")
+        if not isinstance(user_id, int):
+            raise ValueError("User ID must be an integer")
         if not User.query.filter(User.id == user_id).first():
             raise ValueError("Post must have an existing user id")
         return user_id

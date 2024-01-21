@@ -65,6 +65,7 @@ if __name__ == "__main__":
 
       posts.append(post)
 
+    # sort posts by date created
     sorted_posts = sorted(posts, key=lambda x: x.timestamp)
     db.session.add_all(sorted_posts)
 

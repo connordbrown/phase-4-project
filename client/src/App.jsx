@@ -16,17 +16,26 @@ function App() {
 
   useEffect(() => {
     fetch("/api/users")
-    .then(response => response.json())
-    .then(data => setUsers(data))
+    .then(response => {
+        if (response.ok) {
+          response.json().then(data => setUsers(data))
+        } else {
+          response.json().then(err => console.log(err.error))
+        }
+    })
   }, [])
 
   useEffect(() => {
     fetch("/api/posts")
-    .then(response => response.json())
-    .then(data => setPosts(data))
-  }, [])
+    .then(response => {
+      if (response.ok) {
+          response.json().then(data => setPosts(data))
+      } else {
+          response.json().then(err => console.log(err.error))
+      }
+  })
+}, [])
 
-  // make else more useful!
   useEffect(() => {
     fetch("/api/check_session")
     .then(response => {

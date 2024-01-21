@@ -12,8 +12,9 @@ def home():
 
 class Users(Resource):
     def get(self):
-      users_dict_list = [u.to_dict() for u in User.query.all()]
-      return make_response(users_dict_list, 200)
+      if users_dict_list := [u.to_dict() for u in User.query.all()]:
+        return make_response(users_dict_list, 200)
+      return make_response({'error': '404: Not Found'}, 404)
     
     def post(self):
         username = request.json.get('username')
@@ -83,8 +84,9 @@ api.add_resource(CheckSession, '/check_session')
 
 class Posts(Resource):
     def get(self):
-        posts_dict_list = [p.to_dict() for p in Post.query.all()]
-        return make_response(posts_dict_list, 200)
+        if posts_dict_list := [p.to_dict() for p in Post.query.all()]:
+            return make_response(posts_dict_list, 200)
+        return make_response({'error': '404: Not Found'}, 404)
     
     def post(self):
         # user must be logged in to create a Post
@@ -124,8 +126,9 @@ api.add_resource(Posts, '/posts')
 
 class PostByID(Resource):
     def get(self, id):
-        post = Post.query.filter(Post.id == id).first()
-        return make_response(post.to_dict(), 200)
+        if post := Post.query.filter(Post.id == id).first():
+            return make_response(post.to_dict(), 200)
+        return make_response({'error': '404: Not Found'}, 404)
 api.add_resource(PostByID, '/posts/<int:id>')
 
 
