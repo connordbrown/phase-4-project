@@ -22,14 +22,20 @@ class Users(Resource):
         email = request.json.get('email')
         password = request.json.get('password')
 
-        if not username or not age or not email or not password:
-            return make_response({'errors': ['validation errors']}, 400)
+        if not username:
+            return make_response({'error': '400: User must have a username'}, 400)
+        if not age:
+            return make_response({'error': '400: User must have an age'}, 400)
+        if not email:
+            return make_response({'error': '400: User must have an email'}, 400)
+        if not password:
+            return make_response({'error': '400: User must have a password'}, 400)
         if not isinstance(age, int):
-            return make_response({'errors': ['validation errors']}, 400)
+            return make_response({'error': 'Age must be an integer'}, 400)
         if not (10 <= age <= 120):
-            return make_response({'errors': ['validation errors']}, 400)
+            return make_response({'error': 'Age must be between 10 and 120 years'}, 400)
         if ('@' or '.') not in email:
-            return make_response({'errors': ['validation errors']}, 400)
+            return make_response({'error': 'Invalid email'}, 400)
         
         new_user = User(
             username=username,
@@ -93,9 +99,11 @@ class Posts(Resource):
         if not title:
             return make_response({'error': '400: Invalid title'}, 400)
         if not content:
-            return make_response({'errors': '400: Invalid content'}, 400)
+            return make_response({'error': '400: Invalid content'}, 400)
         if not user_id:
             return make_response({'error': '400: Invalid user ID'}, 400)
+        if not isinstance(user_id, int):
+            return make_response({'error': 'User ID must be an integer'}, 400)
         
         new_post = Post(
             title=title,
