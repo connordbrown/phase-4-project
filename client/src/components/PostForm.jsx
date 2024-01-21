@@ -4,13 +4,13 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import './styling/PostForm.css';
 
-function PostForm( { onPost, setPostFormVisible }) {
+function PostForm( { onPost }) {
     const [postError, setPostError] = useState("");
 
     // error in response disappears after time interval
     setTimeout(() => {
         setPostError("");
-    }, 4000);
+    }, 5000);
 
     const formSchema = yup.object().shape({
         title: yup.string().required("Must enter a title").max(50),
@@ -40,7 +40,6 @@ function PostForm( { onPost, setPostFormVisible }) {
                 }
             })
             resetForm();    
-            setPostFormVisible(false);   
         }   
     })
 

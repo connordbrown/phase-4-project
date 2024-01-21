@@ -27,7 +27,7 @@ function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout, onPost }
                 ))}
             </ul>
             {postFormVisible ? <button id='hide-post' onClick={handlePostFormVisible}>Hide post form</button> : null}
-            {postFormVisible ? <PostForm onPost={onPost} setPostFormVisible={setPostFormVisible} /> : <button id='create-post' onClick={handlePostFormVisible}>Make a post</button>}
+            {postFormVisible ? <PostForm onPost={onPost} /> : <button id='create-post' onClick={handlePostFormVisible}>Make a post</button>}
             <hr />
             <h2>Users</h2>
             <ul>
