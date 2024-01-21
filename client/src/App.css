@@ -18,7 +18,7 @@
   margin: 10px;
 }
 
-.posts:hover span{
+.posts:hover span {
   color: yellow;
   cursor: pointer;
 }
@@ -33,4 +33,13 @@
 
 .post-link {
   text-decoration: None;
+}
+
+#create-post {
+  margin-bottom: 20px;
+  margin-left: 25px;
+}
+
+#hide-post {
+  margin-left: 25px;
 }

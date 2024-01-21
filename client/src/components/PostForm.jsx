@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import './styling/PostForm.css';
 
-function PostForm( { onPost }) {
+function PostForm( { onPost, setPostFormVisible }) {
     const [postError, setPostError] = useState("");
 
     // error in response disappears after time interval
@@ -39,7 +39,8 @@ function PostForm( { onPost }) {
                     response.json().then(err => setPostError(err.error));
                 }
             })
-            resetForm();       
+            resetForm();    
+            setPostFormVisible(false);   
         }   
     })
 

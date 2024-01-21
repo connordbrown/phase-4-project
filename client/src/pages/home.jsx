@@ -9,7 +9,7 @@ function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout, onPost }
     const [postFormVisible, setPostFormVisible] = useState(false);
 
     function handlePostFormVisible() {
-        setPostFormVisible(true);
+        setPostFormVisible(!postFormVisible);
     }
 
     return (
@@ -26,7 +26,8 @@ function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout, onPost }
                     </Link>
                 ))}
             </ul>
-            {postFormVisible ? <PostForm onPost={onPost} /> : <button onClick={handlePostFormVisible}>Create a post</button>}
+            {postFormVisible ? <button id='hide-post' onClick={handlePostFormVisible}>Hide post form</button> : null}
+            {postFormVisible ? <PostForm onPost={onPost} setPostFormVisible={setPostFormVisible} /> : <button id='create-post' onClick={handlePostFormVisible}>Make a post</button>}
             <hr />
             <h2>Users</h2>
             <ul>
