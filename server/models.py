@@ -21,7 +21,7 @@ class User(db.Model, SerializerMixin):
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
 
     # rules to prevent recursion error
-    serialize_rules = ('-posts.user', '-comments.user',)
+    serialize_rules = ('-posts.user', '-comments.user', '-comments.post',)
 
     # association proxy to get posts commented on by this user through comments
     commented_posts = association_proxy('comments', 'Post', creator=lambda post_obj: Comment(post=post_obj))
@@ -86,7 +86,7 @@ class Post(db.Model, SerializerMixin):
     comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan')
 
     # rules to prevent recursion error
-    serialize_rules = ('-user.posts', '-comments.post',)
+    serialize_rules = ('-user.posts', '-comments.post', '-comments.user',)
 
     # association proxy to get users who commented on this post through comments
     commenting_users = association_proxy('comments', 'User', creator=lambda user_obj: Comment(user=user_obj))
