@@ -24,7 +24,11 @@ class User(db.Model, SerializerMixin):
     serialize_rules = ('-posts.user', '-comments.user', '-comments.post',)
 
     # association proxy to get posts commented on by this user through comments
-    commented_posts = association_proxy('comments', 'Post', creator=lambda post_obj: Comment(post=post_obj))
+    commented_posts = association_proxy('comments', 'post', creator=lambda post_obj: Comment(post=post_obj))
+
+    # object representation
+    def __repr__(self):
+        return f'User: {self.username}, ID: {self.id}'
 
     # validation for attributes
     @validates('username')
@@ -52,9 +56,6 @@ class User(db.Model, SerializerMixin):
         if User.query.filter(User.email == email).first():
             raise ValueError(f"Email '{email}' is already taken")
         return email
-
-    def __repr__(self):
-        return f'User: {self.username}, ID: {self.id}'
     
     @hybrid_property
     def password_hash(self):
@@ -89,7 +90,11 @@ class Post(db.Model, SerializerMixin):
     serialize_rules = ('-user.posts', '-comments.post', '-comments.user',)
 
     # association proxy to get users who commented on this post through comments
-    commenting_users = association_proxy('comments', 'User', creator=lambda user_obj: Comment(user=user_obj))
+    commenting_users = association_proxy('comments', 'user', creator=lambda user_obj: Comment(user=user_obj))
+
+    # object representation
+    def __repr__(self):
+        return f'<Post {self.id}, {self.title}, {self.timestamp}>'
 
     # validation for attributes
     @validates('title')
@@ -104,11 +109,11 @@ class Post(db.Model, SerializerMixin):
             raise ValueError("Post must have content")
         return content
     
-    @validates('date_posted')
-    def validate_date_posted(self, key, date_posted):
-        if not date_posted:
-            raise ValueError("Post must have a date")
-        return date_posted
+    @validates('timestamp')
+    def validate_timestamp(self, key, timestamp):
+        if not timestamp:
+            raise ValueError("Post must have a timestamp")
+        return timestamp
     
     @validates('user_id')
     def validate_user_id(self, key, user_id):
@@ -120,8 +125,6 @@ class Post(db.Model, SerializerMixin):
             raise ValueError("Post must have an existing user id")
         return user_id
     
-    def __repr__(self):
-        return f'<Post {self.id}, {self.title}, {self.timestamp}>'
 
 ##### Comment Model #####
 class Comment(db.Model, SerializerMixin):
@@ -132,8 +135,8 @@ class Comment(db.Model, SerializerMixin):
     timestamp = db.Column(db.DateTime, nullable=False)
     
     # foreign keys to associate comments to a user and a post - no unassociated comments allowed
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
     # relationship mapping comment to related user
     user = db.relationship('User', back_populates='comments')
@@ -143,3 +146,39 @@ class Comment(db.Model, SerializerMixin):
     # rules to prevent recursion error
     serialize_rules = ('-user.comments', '-post.comments',)
 
+    # object representation
+    def __repr__(self):
+        return f'<Comment {self.id}, User {self.user_id}, Post {self.post_id}, {self.timestamp}'
+    
+    # validation for attributes
+    @validates('content')
+    def validate_content(self, key, content):
+        if not content:
+            raise ValueError("Comment must have content")
+        return content
+    
+    @validates('timestamp')
+    def validate_date_posted(self, key, timestamp):
+        if not timestamp:
+            raise ValueError("Comment must have a timestamp")
+        return timestamp
+    
+    @validates('user_id')
+    def validate_user_id(self, key, user_id):
+        if not user_id:
+            raise ValueError("Post must have a user ID")
+        if not isinstance(user_id, int):
+            raise ValueError("User ID must be an integer")
+        if not User.query.filter(User.id == user_id).first():
+            raise ValueError("Comment must have an existing user ID")
+        return user_id
+    
+    @validates('post_id')
+    def validate_post_id(self, key, post_id):
+        if not post_id:
+            raise ValueError("Comment must have a post ID")
+        if not isinstance(post_id, int):
+            raise ValueError("Post ID must be an integer")
+        if not Post.query.filter(Post.id == post_id).first():
+            raise ValueError("Comment must have an existing post ID")
+        return post_id
