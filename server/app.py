@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from datetime import datetime
 
 from config import app, db, api
-from models import User, Post
+from models import User, Post, Comment
 
 @app.route('/')
 def home():
