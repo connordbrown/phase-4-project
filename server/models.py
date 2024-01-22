@@ -17,10 +17,16 @@ class User(db.Model, SerializerMixin):
 
     # relationship mapping user to related posts
     posts = db.relationship('Post', back_populates='user', cascade='all, delete-orphan')
+    # relationship mapping user to related comments
+    comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
 
     # rules to prevent recursion error
-    serialize_rules = ('-posts.user',)
+    serialize_rules = ('-posts.user', '-comments.user',)
 
+    # association proxy to get posts commented on by this user through comments
+    commented_posts = association_proxy('comments', 'Post', creator=lambda post_obj: Comment(post=post_obj))
+
+    # validation for attributes
     @validates('username')
     def validate_username(self, key, username):
         if not username:
@@ -76,10 +82,16 @@ class Post(db.Model, SerializerMixin):
 
     # relationship mapping the post to related user
     user = db.relationship('User', back_populates='posts')
+    # relationship mapping post to related comments
+    comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan')
 
     # rules to prevent recursion error
-    serialize_rules = ('-user.posts',)
+    serialize_rules = ('-user.posts', '-comments.post',)
 
+    # association proxy to get users who commented on this post through comments
+    commenting_users = association_proxy('comments', 'User', creator=lambda user_obj: Comment(user=user_obj))
+
+    # validation for attributes
     @validates('title')
     def validate_title(self, key, title):
         if not title:
@@ -110,4 +122,24 @@ class Post(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'<Post {self.id}, {self.title}, {self.timestamp}>'
+
+##### Comment Model #####
+class Comment(db.Model, SerializerMixin):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False)
+    
+    # foreign keys to associate comments to a user and a post - no unassociated comments allowed
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    # relationship mapping comment to related user
+    user = db.relationship('User', back_populates='comments')
+    # relationship mapping comment to related post
+    post = db.relationship('Post', back_populates='comments')
+
+    # rules to prevent recursion error
+    serialize_rules = ('-user.comments', '-post.comments',)
 
