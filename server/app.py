@@ -10,6 +10,8 @@ from models import User, Post, Comment
 def home():
     return 'Welcome to Post Maker!'
 
+
+##### User Resources #####
 class Users(Resource):
     def get(self):
       if users_dict_list := [u.to_dict() for u in User.query.all()]:
@@ -57,6 +59,8 @@ class Users(Resource):
             return make_response({'error': '422: Unprocessable Entity'}, 422)
 api.add_resource(Users, '/users')
 
+
+##### Login Resources #####
 class Login(Resource):
     def post(self):
         if user := User.query.filter(User.username == request.json.get('username')).first():
@@ -82,6 +86,8 @@ class CheckSession(Resource):
         return {'error': '401: User not logged in'}, 401
 api.add_resource(CheckSession, '/check_session')
 
+
+##### Post Resources #####
 class Posts(Resource):
     def get(self):
         if posts_dict_list := [p.to_dict() for p in Post.query.all()]:
@@ -130,6 +136,16 @@ class PostByID(Resource):
             return make_response(post.to_dict(), 200)
         return make_response({'error': '404: Not Found'}, 404)
 api.add_resource(PostByID, '/posts/<int:id>')
+
+
+##### Comment Resources #####
+class Comments(Resource):
+    def get(self):
+        if comment_dict_list := [c.to_dict() for c in Comment.query.all()]:
+            return make_response(comment_dict_list, 200)
+        return make_response({'error': '404 Not Found'}, 404)
+    
+api.add_resource(Comments, '/comments')
 
 
 if __name__ == "__main__":
