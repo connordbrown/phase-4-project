@@ -130,18 +130,19 @@ class Posts(Resource):
             return make_response({'error': '422: Unprocessable Entity'}, 422)
 api.add_resource(Posts, '/posts')
 
-class PostByID(Resource):
-    def get(self, id):
-        if post := Post.query.filter(Post.id == id).first():
-            return make_response(post.to_dict(), 200)
-        return make_response({'error': '404: Not Found'}, 404)
-api.add_resource(PostByID, '/posts/<int:id>')
+# for updating or deleting posts - add later
+# class PostByID(Resource):
+#     def get(self, id):
+#         if post := Post.query.filter(Post.id == id).first():
+#             return make_response(post.to_dict(), 200)
+#         return make_response({'error': '404: Not Found'}, 404)
+# api.add_resource(PostByID, '/posts/<int:id>')
 
 
 ##### Comment Resources #####
 class Comments(Resource):
-    def get(self):
-        if comment_dict_list := [c.to_dict() for c in Comment.query.all()]:
+    def get(self, post_id):
+        if comment_dict_list := [c.to_dict(rules=('-post', '-user',)) for c in Comment.query.filter(Comment.post_id == post_id).all()]:
             return make_response(comment_dict_list, 200)
         return make_response({'error': '404: Not Found'}, 404)
 
@@ -183,7 +184,7 @@ class Comments(Resource):
         except IntegrityError:
             return make_response({'error': '422: Unprocessable Entity'}, 422)
 # comments are associated with a specific post view        
-api.add_resource(Comments, '/comments/<int:post_id>')
+api.add_resource(Comments, '/posts/<int:post_id>/comments')
 
 
 
