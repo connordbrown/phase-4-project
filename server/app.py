@@ -52,7 +52,7 @@ class Users(Resource):
         try:
             db.session.add(new_user)
             db.session.commit()
-            # get user id with data
+            # get user id with response data
             new_user_data = db.session.get(User, new_user.id)
             return make_response(new_user_data.to_dict(), 201)
         except IntegrityError:
@@ -95,7 +95,7 @@ class Posts(Resource):
         return make_response({'error': '404: Not Found'}, 404)
     
     def post(self):
-        # user must be logged in to create a Post
+        # user must be logged in to make a Post
         if not session.get('user_id'):
             return make_response({'error': '401: User not logged in'}, 401)
         title = request.json.get('title')
@@ -123,11 +123,11 @@ class Posts(Resource):
         try:
             db.session.add(new_post)
             db.session.commit()
-            # get post id with data
+            # get post id with response data
             new_post_data = db.session.get(Post, new_post.id)
             return make_response(new_post_data.to_dict(), 201)
         except IntegrityError:
-            return make_response({'error': '422 Unprocessable Entity'}, 422)
+            return make_response({'error': '422: Unprocessable Entity'}, 422)
 api.add_resource(Posts, '/posts')
 
 class PostByID(Resource):
@@ -143,9 +143,48 @@ class Comments(Resource):
     def get(self):
         if comment_dict_list := [c.to_dict() for c in Comment.query.all()]:
             return make_response(comment_dict_list, 200)
-        return make_response({'error': '404 Not Found'}, 404)
-    
-api.add_resource(Comments, '/comments')
+        return make_response({'error': '404: Not Found'}, 404)
+
+    def post(self):
+        # user must be logged in to make a comment
+        if not session.get('user_id'):
+            return make_response({'error': '401: User not logged in'})
+        content = request.json.get('content')
+        timestamp = datetime.now()
+        # id from logged in user
+        user_id = session.get('user_id')
+        # extract the post id from the URL path
+        post_id = request.view_args.get('post_id')
+
+        if not content:
+            return make_response({'error': '400: Invalid content'}, 400)
+        if not user_id:
+            return make_response({'error': '400: Invalid user ID'}, 400)
+        if not post_id:
+            return make_response({'error': '400: Invalid post ID'}, 400)
+        if not isinstance(user_id, int):
+            return make_response({'error': '400: User ID must be an integer'})
+        if not isinstance(post_id, int):
+            return make_response({'error': '400: Post ID must be an integer'})
+        
+        new_comment = Comment(
+            content=content,
+            timestamp=timestamp,
+            user_id=user_id,
+            post_id=post_id
+        )
+
+        try:
+            db.session.add(new_comment)
+            db.session.commit()
+            # get comment id with response data
+            new_comment_data = db.session.get(Comment, new_comment.id)
+            return make_response(new_comment_data.to_dict(), 201)
+        except IntegrityError:
+            return make_response({'error': '422: Unprocessable Entity'}, 422)
+# comments are associated with a specific post view        
+api.add_resource(Comments, '/comments/<int:post_id>')
+
 
 
 if __name__ == "__main__":
