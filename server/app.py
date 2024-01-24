@@ -142,7 +142,8 @@ api.add_resource(Posts, '/posts')
 ##### Comment Resources #####
 class Comments(Resource):
     def get(self, post_id):
-        if comment_dict_list := [c.to_dict(rules=('-post', '-user',)) for c in Comment.query.filter(Comment.post_id == post_id).all()]:
+        # filter to get correct comments and use rules to extract required information
+        if comment_dict_list := [c.to_dict(rules=('-post',)) for c in Comment.query.filter(Comment.post_id == post_id).all()]:
             return make_response(comment_dict_list, 200)
         return make_response({'error': '404: Not Found'}, 404)
 

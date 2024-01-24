@@ -9,6 +9,7 @@ if __name__ == "__main__":
     print("Deleting all records...")
     User.query.delete()
     Post.query.delete()
+    Comment.query.delete()
 
     fake = Faker()
 
