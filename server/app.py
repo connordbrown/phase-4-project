@@ -130,13 +130,13 @@ class Posts(Resource):
             return make_response({'error': '422: Unprocessable Entity'}, 422)
 api.add_resource(Posts, '/posts')
 
-# for updating or deleting posts - add later
-# class PostByID(Resource):
-#     def get(self, id):
-#         if post := Post.query.filter(Post.id == id).first():
-#             return make_response(post.to_dict(), 200)
-#         return make_response({'error': '404: Not Found'}, 404)
-# api.add_resource(PostByID, '/posts/<int:id>')
+#for updating or deleting posts - add later
+class PostByID(Resource):
+    def get(self, id):
+        if post := Post.query.filter(Post.id == id).first():
+            return make_response(post.to_dict(), 200)
+        return make_response({'error': '404: Not Found'}, 404)
+api.add_resource(PostByID, '/posts/<int:id>')
 
 
 ##### Comment Resources #####
