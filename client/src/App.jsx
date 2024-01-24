@@ -71,7 +71,7 @@ function App() {
     <main>   
       <BrowserRouter>
         <div className='row'>
-          <h1>myApp</h1>
+          <h1>PostMaker</h1>
           <NavBar />
         </div>
         <div className='content'>
@@ -85,7 +85,7 @@ function App() {
                                       onLogout={handleLogout}
                                       onPost={handleAddPost} />} 
             />
-            <Route path='/posts/:id' element={<PostInfo posts={posts} />} />
+            <Route path='/posts/:id' element={<PostInfo />} />
             <Route path='/about' element={<About />} />
             <Route path='/signup' element={<SignUp onAddUser={handleAddUser} />} />
             <Route path='*' element={<ErrorPage />} />

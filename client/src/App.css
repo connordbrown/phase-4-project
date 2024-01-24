@@ -5,6 +5,7 @@
   text-align: center;
 } */
 
+/* App.jsx */
 .card {
   padding: 2em;
 }
@@ -18,6 +19,7 @@
   margin: 10px;
 }
 
+/* Home.jsx */
 .posts:hover span {
   color: yellow;
   cursor: pointer;
@@ -42,4 +44,13 @@
 
 #hide-post {
   margin-left: 25px;
+}
+
+/* PostInfo.jsx */
+.comments {
+  margin-left: 20px;
+}
+
+.comment {
+  font-size: smaller;
 }
