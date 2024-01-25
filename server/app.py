@@ -189,6 +189,9 @@ api.add_resource(Comments, '/posts/<int:post_id>/comments')
 
 class CommentByID(Resource):
     def patch(self, id, post_id):
+        # user must be logged in to edit a comment
+        if not session.get('user_id'):
+            return make_response({'error': '401: User not logged in'}, 401)
         # check for comment using multiple conditions
         if comment := Comment.query.filter(Comment.id == id, Comment.post_id == post_id).first():
             if not request.json.get('content'):
@@ -210,6 +213,9 @@ class CommentByID(Resource):
         return make_response({'error': 'Comment not found'}, 404)
     
     def delete(self, id, post_id):
+        # user must be logged in to delete a comment
+        if not session.get('user_id'):
+            return make_response({'error': '401: User not logged in'}, 401)
         # check for comment using multiple conditions
         if comment := Comment.query.filter(Comment.id == id, Comment.post_id == post_id).first():
             db.session.delete(comment)
