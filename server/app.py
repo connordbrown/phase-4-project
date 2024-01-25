@@ -189,6 +189,7 @@ api.add_resource(Comments, '/posts/<int:post_id>/comments')
 
 class CommentByID(Resource):
     def patch(self, id, post_id):
+        # check for comment using multiple conditions
         if comment := Comment.query.filter(Comment.id == id, Comment.post_id == post_id).first():
             if not request.json.get('content'):
                 return make_response({'error': '400: Invalid content'}, 400)
@@ -209,11 +210,13 @@ class CommentByID(Resource):
         return make_response({'error': 'Comment not found'}, 404)
     
     def delete(self, id, post_id):
+        # check for comment using multiple conditions
         if comment := Comment.query.filter(Comment.id == id, Comment.post_id == post_id).first():
             db.session.delete(comment)
             db.session.commit()
             return make_response({}, 204)
         return make_response({'error': '404: Comment not found'}, 404)
+# comments are associated with a specific post view    
 api.add_resource(CommentByID, '/posts/<int:post_id>/comments/<int:id>')
 
 
