@@ -155,7 +155,7 @@ class Comments(Resource):
         timestamp = datetime.now()
         # id from logged in user
         user_id = session.get('user_id')
-        # extract the post id from the URL path
+        # ensure correct post_id value by reassigning to current view_arg
         post_id = request.view_args.get('post_id')
 
         if not content:
@@ -189,9 +189,10 @@ api.add_resource(Comments, '/posts/<int:post_id>/comments')
 
 class CommentByID(Resource):
     def patch(self, id, post_id):
-        if comment := Comment.query.filter(Comment.id == id).first():
+        if comment := Comment.query.filter(Comment.id == id, Comment.post_id == post_id).first():
             if not request.json.get('content'):
                 return make_response({'error': '400: Invalid content'}, 400)
+            # update comment attribute (content)
             for attr in request.json:
                 setattr(comment, attr, request.json.get(attr))
             # ensure correct post_id value by reassigning to current view_arg
@@ -206,6 +207,13 @@ class CommentByID(Resource):
             except IntegrityError:
                 return make_response({'error': '422 Unprocessable Entity'})
         return make_response({'error': 'Comment not found'}, 404)
+    
+    def delete(self, id, post_id):
+        if comment := Comment.query.filter(Comment.id == id, Comment.post_id == post_id).first():
+            db.session.delete(comment)
+            db.session.commit()
+            return make_response({}, 204)
+        return make_response({'error': '404: Comment not found'}, 404)
 api.add_resource(CommentByID, '/posts/<int:post_id>/comments/<int:id>')
 
 
