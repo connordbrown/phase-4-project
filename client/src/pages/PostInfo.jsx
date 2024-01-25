@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import CommentForm from '../components/CommentForm';
 import '../App.css';
 
-function PostInfo() {
+function PostInfo({ loggedIn, currentUser }) {
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
     const [postsLoaded, setPostsLoaded] = useState(false);
@@ -67,8 +67,14 @@ function PostInfo() {
                 <ul className='comment-list'>
                     {comments.map(comment => (
                         <li className='comment' key={comment.id}>
-                            <span>
+                            <span className='comment-container'>
                                 {comment.user.username} : {comment.content} - {comment.timestamp}
+                                {loggedIn && comment.user_id === currentUser.id && (
+                                <>
+                                    <button className='edit-button'>edit</button>
+                                    <button className='delete-button'>delete</button>
+                                </>
+                                )}
                             </span>
                         </li>
                     ))}

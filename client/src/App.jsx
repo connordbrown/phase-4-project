@@ -85,7 +85,7 @@ function App() {
                                       onLogout={handleLogout}
                                       onPost={handleAddPost} />} 
             />
-            <Route path='/posts/:id' element={<PostInfo />} />
+            <Route path='/posts/:id' element={<PostInfo loggedIn={loggedIn} currentUser={currentUser} />} />
             <Route path='/about' element={<About />} />
             <Route path='/signup' element={<SignUp onAddUser={handleAddUser} />} />
             <Route path='*' element={<ErrorPage />} />
