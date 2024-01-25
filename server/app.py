@@ -147,10 +147,10 @@ class Comments(Resource):
             return make_response(comment_dict_list, 200)
         return make_response({'error': '404: Not Found'}, 404)
 
-    def post(self):
+    def post(self, post_id):
         # user must be logged in to make a comment
         if not session.get('user_id'):
-            return make_response({'error': '401: User not logged in'})
+            return make_response({'error': '401: User not logged in'}, 401)
         content = request.json.get('content')
         timestamp = datetime.now()
         # id from logged in user
@@ -165,9 +165,9 @@ class Comments(Resource):
         if not post_id:
             return make_response({'error': '400: Invalid post ID'}, 400)
         if not isinstance(user_id, int):
-            return make_response({'error': '400: User ID must be an integer'})
+            return make_response({'error': '400: User ID must be an integer'}, 400)
         if not isinstance(post_id, int):
-            return make_response({'error': '400: Post ID must be an integer'})
+            return make_response({'error': '400: Post ID must be an integer'}, 400)
         
         new_comment = Comment(
             content=content,
