@@ -130,7 +130,7 @@ class Posts(Resource):
             return make_response({'error': '422: Unprocessable Entity'}, 422)
 api.add_resource(Posts, '/posts')
 
-#for updating or deleting posts - add later
+
 class PostByID(Resource):
     def get(self, id):
         if post := Post.query.filter(Post.id == id).first():
@@ -187,6 +187,26 @@ class Comments(Resource):
 # comments are associated with a specific post view        
 api.add_resource(Comments, '/posts/<int:post_id>/comments')
 
+class CommentByID(Resource):
+    def patch(self, id, post_id):
+        if comment := Comment.query.filter(Comment.id == id).first():
+            if not request.json.get('content'):
+                return make_response({'error': '400: Invalid content'}, 400)
+            for attr in request.json:
+                setattr(comment, attr, request.json.get(attr))
+            # ensure correct post_id value by reassigning to current view_arg
+            post_id = request.view_args.get('post_id')
+            comment.post_id = post_id
+            # assign new timestamp for edited comment
+            comment.timestamp = datetime.now()
+            try:
+                db.session.add(comment)
+                db.session.commit()
+                return make_response(comment.to_dict(), 200)
+            except IntegrityError:
+                return make_response({'error': '422 Unprocessable Entity'})
+        return make_response({'error': 'Comment not found'}, 404)
+api.add_resource(CommentByID, '/posts/<int:post_id>/comments/<int:id>')
 
 
 if __name__ == "__main__":
