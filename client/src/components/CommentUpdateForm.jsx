@@ -19,6 +19,7 @@ function CommentUpdateForm( { selectedComment, onUpdate }) {
         initialValues: {
             content: selectedComment.content,
         },
+        enableReinitialize: true,  // clear form when props change
         validationSchema: formSchema,
         onSubmit: (values, { resetForm }) => {
             fetch(`/api/posts/${selectedComment.post_id}/comments/${selectedComment.id}`, {

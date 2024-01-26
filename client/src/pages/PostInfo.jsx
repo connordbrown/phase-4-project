@@ -12,7 +12,7 @@ function PostInfo({ loggedIn, currentUser }) {
     const [commentsLoaded, setCommentsLoaded] = useState(false);
 
     const [updatingComment, setUpdatingComment] = useState(false);
-    const [selectedComment, setSelectedComment] = useState(null);
+    const [selectedComment, setSelectedComment] = useState({});
 
     // get specific endpoint - useParams() returns string
     const params = useParams();
@@ -66,6 +66,8 @@ function PostInfo({ loggedIn, currentUser }) {
             return comment;
         })
         setComments(updatedComments);
+        setSelectedComment({});
+        setUpdatingComment(false);
     }
 
     function handleDeleteComment(commentID, postID) {
