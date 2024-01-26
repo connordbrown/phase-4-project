@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 // for finding data that matches url endpoint parameter
 import { useParams } from 'react-router-dom';
 import CommentForm from '../components/CommentForm';
+import CommentUpdateForm from '../components/CommentUpdateForm';
 import '../App.css';
 
 function PostInfo({ loggedIn, currentUser }) {
-    const [post, setPost] = useState([]);
+    const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
     const [postsLoaded, setPostsLoaded] = useState(false);
     const [commentsLoaded, setCommentsLoaded] = useState(false);
+
+    const [updatingComment, setUpdatingComment] = useState(false);
+    const [selectedComment, setSelectedComment] = useState(null);
 
     // get specific endpoint - useParams() returns string
     const params = useParams();
@@ -48,6 +52,42 @@ function PostInfo({ loggedIn, currentUser }) {
         setComments(updatedComments);
     }
 
+    function configureUpdateComment(commentID) {
+        const commentToUpdate = comments.find(comment => comment.id === commentID);
+        setSelectedComment(commentToUpdate);
+        setUpdatingComment(true);
+    }
+
+    function handleUpdateComment(updatedComment) {
+        const updatedComments = comments.map(comment => {
+            if (comment.id === updatedComment.id) {
+                return updatedComment;
+            }
+            return comment;
+        })
+        setComments(updatedComments);
+    }
+
+    function handleDeleteComment(commentID, postID) {
+        fetch(`/api/posts/${postID}/comments/${commentID}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                const updatedComments = comments.filter(comment => {
+                    return comment.id !== commentID;
+                })
+                setComments(updatedComments);
+            } else {
+                response.json().then(err => console.log(err.error))
+            }
+        })
+    }
+
     if (!postsLoaded) {
         return <div>Loading posts...</div>; // Show a loading state while data is being fetched
     }
@@ -71,8 +111,8 @@ function PostInfo({ loggedIn, currentUser }) {
                                 {comment.user.username} : {comment.content} - {comment.timestamp}
                                 {loggedIn && comment.user_id === currentUser.id && (
                                 <>
-                                    <button className='edit-button'>edit</button>
-                                    <button className='delete-button'>delete</button>
+                                    <button className='edit-button' onClick={() => configureUpdateComment(comment.id)}>edit</button>
+                                    <button className='delete-button' onClick={() => handleDeleteComment(comment.id, post.id)}>delete</button>
                                 </>
                                 )}
                             </span>
@@ -80,7 +120,7 @@ function PostInfo({ loggedIn, currentUser }) {
                     ))}
                 </ul>
             </div>
-            <CommentForm onComment={handleAddComment} />
+            {updatingComment ? <CommentUpdateForm selectedComment={selectedComment} onUpdate={handleUpdateComment}/> : <CommentForm onComment={handleAddComment} />}
         </div>
     )
 
