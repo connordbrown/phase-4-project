@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styling/Logout.css';
 
-function LogoutForm( { onLogout }) {
+function Logout( { onLogout }) {
     const [logoutError, setLogoutError] = useState("");
 
     // error in response disappears after time interval
@@ -37,4 +37,4 @@ function LogoutForm( { onLogout }) {
     )
 }
 
-export default LogoutForm;
+export default Logout;
