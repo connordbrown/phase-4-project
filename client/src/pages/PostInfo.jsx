@@ -105,11 +105,16 @@ function PostInfo({ loggedIn, currentUser }) {
             <h2>{post.title}</h2>
             <span>by {post.user.username} - {post.timestamp}</span>
             <p>{post.content}</p>
-            <CommentList comments={comments} loggedIn={loggedIn} currentUser={currentUser} />
+            <CommentList comments={comments}
+                         loggedIn={loggedIn}
+                         currentUser={currentUser}
+                        onUpdateCommentClick={configureUpdateComment} 
+                        onDeleteCommentClick={handleDeleteComment}
+            />
             {updatingComment ? <CommentUpdateForm selectedComment={selectedComment} onUpdate={handleUpdateComment}/> : <CommentForm onComment={handleAddComment} />}
         </div>
     )
 
-    }
+}
 
-    export default PostInfo;
+export default PostInfo;

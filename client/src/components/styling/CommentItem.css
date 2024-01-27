@@ -1,0 +1,17 @@
+  .comment {
+    font-size: smaller;
+  }
+  
+  .edit-button {
+    margin-left: 10px;
+    font-size: xx-small;
+  }
+  
+  .delete-button {
+    margin-left: 10px;
+    font-size: xx-small;
+  }
+  
+  .comment-container {
+    display: flex;
+  }

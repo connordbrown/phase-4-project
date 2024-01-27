@@ -1,7 +1,8 @@
 import React from 'react';
 import './styling/CommentList.css';
+import CommentItem from './CommentItem.jsx';
 
-function CommentList({ comments, loggedIn, currentUser }) {
+function CommentList({ comments, loggedIn, currentUser, onUpdateCommentClick, onDeleteCommentClick }) {
 
     // display post details and comments
     return (
@@ -9,22 +10,16 @@ function CommentList({ comments, loggedIn, currentUser }) {
                 <h4>Comments</h4>
                 <ul className='comment-list'>
                     {comments.map(comment => (
-                        <li className='comment' key={comment.id}>
-                            <span className='comment-container'>
-                                {comment.user.username} : {comment.content} - {comment.timestamp}
-                                {loggedIn && comment.user_id === currentUser.id && (
-                                <>
-                                    <button className='edit-button' onClick={() => configureUpdateComment(comment.id)}>edit</button>
-                                    <button className='delete-button' onClick={() => handleDeleteComment(comment.id, post.id)}>delete</button>
-                                </>
-                                )}
-                            </span>
-                        </li>
+                        <CommentItem comment={comment}
+                                     loggedIn={loggedIn} 
+                                     currentUser={currentUser} 
+                                     onUpdateCommentClick={onUpdateCommentClick} 
+                                     onDeleteCommentClick={onDeleteCommentClick} 
+                        />
                     ))}
                 </ul>
             </div>
     )
-
 }
 
 export default CommentList;
