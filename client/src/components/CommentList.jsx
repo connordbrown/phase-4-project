@@ -4,7 +4,7 @@ import CommentItem from './CommentItem.jsx';
 
 function CommentList({ comments, loggedIn, currentUser, onUpdateCommentClick, onDeleteCommentClick }) {
 
-    // display post details and comments
+    // display comment list
     return (
             <div className='comments'>
                 <h4>Comments</h4>

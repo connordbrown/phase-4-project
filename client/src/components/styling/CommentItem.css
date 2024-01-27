@@ -1,6 +1,10 @@
   .comment {
     font-size: smaller;
   }
+
+  .comment-container {
+    display: flex;
+  }
   
   .edit-button {
     margin-left: 10px;
@@ -10,8 +14,4 @@
   .delete-button {
     margin-left: 10px;
     font-size: xx-small;
-  }
-  
-  .comment-container {
-    display: flex;
   }

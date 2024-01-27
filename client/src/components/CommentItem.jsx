@@ -3,7 +3,7 @@ import './styling/CommentItem.css';
 
 function CommentItem({ comment, loggedIn, currentUser, onUpdateCommentClick, onDeleteCommentClick }) {
 
-    // display post details and comments
+    // display comment details
     return (
             <div>
                 <li className='comment' key={comment.id}>
