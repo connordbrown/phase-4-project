@@ -1,5 +1,6 @@
 import React from 'react';
 import './styling/UserList.css';
+import UserItem from './UserItem';
 
 function UserList({ users }) {
 
@@ -8,11 +9,7 @@ function UserList({ users }) {
             <h2>Users</h2>
             <ul>
                 {users.map(user => (
-                <li key={user.id}>
-                    <span>
-                    {user.username}, age: {user.age}, email: {user.email}
-                    </span>
-                </li>
+                    <UserItem user={user} key={user.id} />
                 ))}
             </ul> 
         </div>
