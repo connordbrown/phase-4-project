@@ -10,7 +10,8 @@ function CommentList({ comments, loggedIn, currentUser, onUpdateCommentClick, on
                 <h4>Comments</h4>
                 <ul className='comment-list'>
                     {comments.map(comment => (
-                        <CommentItem comment={comment}
+                        <CommentItem key={comment.id}
+                                     comment={comment}
                                      loggedIn={loggedIn} 
                                      currentUser={currentUser} 
                                      onUpdateCommentClick={onUpdateCommentClick} 
