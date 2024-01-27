@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import PostList from '../components/PostList';
 import UserList from '../components/UserList';
 import LoginForm from '../components/LoginForm';
