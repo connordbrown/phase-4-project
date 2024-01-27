@@ -45,26 +45,3 @@
 #hide-post {
   margin-left: 25px;
 }
-
-/* PostInfo.jsx */
-.comments {
-  margin-left: 20px;
-}
-
-.comment {
-  font-size: smaller;
-}
-
-.edit-button {
-  margin-left: 10px;
-  font-size: xx-small;
-}
-
-.delete-button {
-  margin-left: 10px;
-  font-size: xx-small;
-}
-
-.comment-container {
-  display: flex;
-}
