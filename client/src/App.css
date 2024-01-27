@@ -20,28 +20,11 @@
 }
 
 /* Home.jsx */
-.posts:hover span {
-  color: yellow;
-  cursor: pointer;
-}
-
-.post-link:link {
-  color: rgba(255, 255, 255, 0.87);
-}
-
-.post-link:visited {
-  color: rgba(255, 255, 255, 0.87);
-}
-
-.post-link {
-  text-decoration: None;
-}
-
 #create-post {
   margin-bottom: 20px;
   margin-left: 25px;
 }
 
-#hide-post {
+#hide-post-form {
   margin-left: 25px;
 }

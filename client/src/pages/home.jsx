@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PostList from '../components/PostList';
 import UserList from '../components/UserList';
 import LoginForm from '../components/LoginForm';
 import Logout from '../components/Logout';
@@ -15,19 +16,8 @@ function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout, onPost }
 
     return (
         <div>
-            <h2>Posts</h2>
-            <ul>
-                {posts.map(post => (
-                    <Link to={`/posts/${post.id}`} key={post.id} className='post-link'>
-                        <li className='posts'>
-                            <span>
-                                 {post.title} - <em>{post.user['username']}</em>
-                            </span>
-                        </li>
-                    </Link>
-                ))}
-            </ul>
-            {postFormVisible ? <button id='hide-post' onClick={handlePostFormVisible}>Hide post form</button> : null}
+            <PostList posts= {posts} />
+            {postFormVisible ? <button id='hide-post-form' onClick={handlePostFormVisible}>Hide post form</button> : null}
             {postFormVisible ? <PostForm onPost={onPost} /> : <button id='create-post' onClick={handlePostFormVisible}>Make a post</button>}
             <hr />
             <UserList users={users} />
