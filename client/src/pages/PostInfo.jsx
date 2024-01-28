@@ -11,9 +11,10 @@ import '../App.css';
 // displays current post, associated comments, and comment creation tool
 function PostInfo({ loggedIn, currentUser }) {
     // current post
-    const [post, setPost] = useState(null);
+    const [post, setPost] = useState({});
     // associated comments
     const [comments, setComments] = useState([]);
+
     // loading states
     const [postLoaded, setPostLoaded] = useState(false);
     const [commentsLoaded, setCommentsLoaded] = useState(false);

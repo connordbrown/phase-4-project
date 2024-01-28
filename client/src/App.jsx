@@ -18,12 +18,19 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // loading states
+  const [usersLoaded, setUsersLoaded] = useState(false);
+  const [postsLoaded, setPostsLoaded] = useState(false);
+
   // get user data
   useEffect(() => {
     fetch("/api/users")
     .then(response => {
         if (response.ok) {
-          response.json().then(data => setUsers(data));
+          response.json().then(data => {
+            setUsers(data);
+            setUsersLoaded(true);
+          });
         } else {
           response.json().then(err => console.log(err.error));
         }
@@ -35,7 +42,10 @@ function App() {
     fetch("/api/posts")
     .then(response => {
       if (response.ok) {
-          response.json().then(data => setPosts(data));
+          response.json().then(data => {
+            setPosts(data);
+            setPostsLoaded(true);
+          });
       } else {
           response.json().then(err => console.log(err.error));
       }
@@ -76,6 +86,16 @@ function App() {
   function handleLogout() {
       setCurrentUser(null);
       setLoggedIn(false);   
+  }
+
+  // Show a loading state while user data are being fetched
+  if (!usersLoaded) {
+      return <div>Loading users...</div>;
+  }
+
+      // Show a loading state while posts data are being fetched
+  if (!postsLoaded) {
+      return <div>Loading posdt...</div>
   }
 
   return (
