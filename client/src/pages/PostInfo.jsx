@@ -35,7 +35,7 @@ function PostInfo({ loggedIn, currentUser }) {
                     setPostLoaded(true);
                 })
             } else {
-                response.json().then(err => console.log(err.error))
+                response.json().then(err => console.log(err.error));
             }
         })
     }, [])
@@ -101,7 +101,7 @@ function PostInfo({ loggedIn, currentUser }) {
                 })
                 setComments(updatedComments);
             } else {
-                response.json().then(err => console.log(err.error))
+                response.json().then(err => console.log(err.error));
             }
         })
     }

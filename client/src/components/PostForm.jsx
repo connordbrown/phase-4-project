@@ -8,6 +8,7 @@ import './styling/PostForm.css';
 
 // allows logged in user to create a post
 function PostForm( { onPost }) {
+    // postError state
     const [postError, setPostError] = useState("");
 
     // error in response disappears after time interval

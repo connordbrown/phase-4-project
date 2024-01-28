@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // for form creation
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -7,6 +7,13 @@ import './styling/SignUpForm.css';
 
 // allows user to sign up for app (create new user)
 function SignUpForm( { onAddUser }) {
+    // userError state
+    const [userError, setUserError] = useState("");
+
+    // error in response disappears after time interval
+    setTimeout(() => {
+        setUserError("");
+    }, 5000);
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a username").max(15),
@@ -32,14 +39,20 @@ function SignUpForm( { onAddUser }) {
                 },
                 body: JSON.stringify(values, null, 2)
             })
-            .then(response => response.json())
-            .then(newUser => onAddUser(newUser))
+            .then(response => {
+                if (response.ok) {
+                    response.json().then(newUser => onAddUser(newUser));
+                } else {
+                    response.json().then(err => setPostError(err.error));
+                }
+            })
             resetForm();
         }   
     })
 
     return (
         <div>
+            {userError ? <p style={{'color' : 'red'}}>{userError}</p> : null}
             <div className='form-container'>
                 <form id='signup-form' onSubmit={formik.handleSubmit}>
                 <label htmlFor='username'>New User Sign Up:</label>
