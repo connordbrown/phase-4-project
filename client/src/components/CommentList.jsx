@@ -1,10 +1,12 @@
 import React from 'react';
+// styling
 import './styling/CommentList.css';
+// child component
 import CommentItem from './CommentItem.jsx';
 
+// displays list of comments
 function CommentList({ comments, loggedIn, currentUser, onUpdateCommentClick, onDeleteCommentClick }) {
 
-    // display comment list
     return (
             <div className='comments'>
                 <h4>Comments</h4>

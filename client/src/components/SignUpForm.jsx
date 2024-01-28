@@ -1,8 +1,11 @@
 import React from 'react';
+// for form creation
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+// styling
 import './styling/SignUpForm.css';
 
+// allows user to sign up for app (create new user)
 function SignUpForm( { onAddUser }) {
 
     const formSchema = yup.object().shape({

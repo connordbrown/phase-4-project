@@ -1,9 +1,10 @@
 import React from 'react';
+// styling
 import './styling/CommentItem.css';
 
+// displays comment details
 function CommentItem({ comment, loggedIn, currentUser, onUpdateCommentClick, onDeleteCommentClick }) {
 
-    // display comment details
     return (
             <div>
                 <li className='comment' key={comment.id}>

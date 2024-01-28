@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
 // for finding data that matches url endpoint parameter
 import { useParams } from 'react-router-dom';
+// comments and comment create/update tools for current post
 import CommentList from '../components/CommentList';
 import CommentForm from '../components/CommentForm';
 import CommentUpdateForm from '../components/CommentUpdateForm';
+// styling
 import '../App.css';
 
+// displays current post, associated comments, and comment creation tool
 function PostInfo({ loggedIn, currentUser }) {
+    // current post
     const [post, setPost] = useState(null);
+    // associated comments
     const [comments, setComments] = useState([]);
-    const [postsLoaded, setPostsLoaded] = useState(false);
+    // loading states
+    const [postLoaded, setPostLoaded] = useState(false);
     const [commentsLoaded, setCommentsLoaded] = useState(false);
 
+    // for updating comments
     const [updatingComment, setUpdatingComment] = useState(false);
     const [selectedComment, setSelectedComment] = useState({});
 
@@ -25,7 +32,7 @@ function PostInfo({ loggedIn, currentUser }) {
             if (response.ok) {
                 response.json().then(data => {
                     setPost(data);
-                    setPostsLoaded(true);
+                    setPostLoaded(true);
                 })
             } else {
                 response.json().then(err => console.log(err.error))
@@ -52,17 +59,20 @@ function PostInfo({ loggedIn, currentUser }) {
         })
     }, [])
 
+    // add a new comment
     function handleAddComment(newComment) {
         const updatedComments = [...comments, newComment];
         setComments(updatedComments);
     }
 
+    // find comment to update, change create form to update form
     function configureUpdateComment(commentID) {
         const commentToUpdate = comments.find(comment => comment.id === commentID);
         setSelectedComment(commentToUpdate);
         setUpdatingComment(true);
     }
 
+    // update comment
     function handleUpdateComment(updatedComment) {
         const updatedComments = comments.map(comment => {
             if (comment.id === updatedComment.id) {
@@ -75,6 +85,7 @@ function PostInfo({ loggedIn, currentUser }) {
         setUpdatingComment(false);
     }
 
+    // delete comment
     function handleDeleteComment(commentID, postID) {
         fetch(`/api/posts/${postID}/comments/${commentID}`, {
             method: "DELETE",
@@ -95,15 +106,16 @@ function PostInfo({ loggedIn, currentUser }) {
         })
     }
 
-    if (!postsLoaded) {
-        return <div>Loading posts...</div>; // Show a loading state while data is being fetched
+    // Show a loading state while post data are being fetched
+    if (!postLoaded) {
+        return <div>Loading posts...</div>;
     }
 
+        // Show a loading state while comments data are being fetched
     if (!commentsLoaded) {
         return <div>Loading comments...</div>
     }
 
-    // display post details and comments
     return (
         <div>
             <h2>{post.title}</h2>

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+// for form creation
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+// styling
 import './styling/LoginForm.css';
 
 function LoginForm( { onLogin }) {
+    // loginError state
     const [loginError, setLoginError] = useState("");
 
     // error in response disappears after time interval

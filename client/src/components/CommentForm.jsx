@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+// for finding data that matches url endpoint parameter
 import { useParams } from 'react-router-dom';
+// for form creation
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+// styling
 import './styling/CommentForm.css';
 
+// allows logged in user to create a comment
 function CommentForm( { onComment }) {
+    // commentError state
     const [commentError, setCommentError] = useState("");
 
     // get specific endpoint - useParams() returns string

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+// styling
 import './styling/Logout.css';
 
 function Logout( { onLogout }) {
+    // logoutError state
     const [logoutError, setLogoutError] = useState("");
 
     // error in response disappears after time interval

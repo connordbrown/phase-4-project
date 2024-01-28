@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+// for form creation
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+// styling
 import './styling/CommentUpdateForm.css';
 
 function CommentUpdateForm( { selectedComment, onUpdate }) {
+    // updateError state
     const [updateError, setUpdateError] = useState("");
 
     // error in response disappears after time interval

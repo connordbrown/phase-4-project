@@ -1,7 +1,10 @@
 import React from 'react';
+// styling
 import './styling/UserList.css';
+// child component
 import UserItem from './UserItem';
 
+// displays list of users
 function UserList({ users }) {
 
     return (

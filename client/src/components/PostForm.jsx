@@ -1,9 +1,12 @@
 
 import React, { useState } from 'react';
+// for form creation
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+// styling
 import './styling/PostForm.css';
 
+// allows logged in user to create a post
 function PostForm( { onPost }) {
     const [postError, setPostError] = useState("");
 

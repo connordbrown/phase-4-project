@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+// styling
 import './App.css';
+// routing
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// pages for routes
 import NavBar from './components/NavBar';
 import Home from './pages/home'; // interpreter has issue with casing
 import PostInfo from './pages/PostInfo';
@@ -9,11 +12,13 @@ import SignUp from './pages/SignUp';
 import ErrorPage from './pages/ErrorPage';
 
 function App() {
+  // states for main app data
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // get user data
   useEffect(() => {
     fetch("/api/users")
     .then(response => {
@@ -25,6 +30,7 @@ function App() {
     })
   }, [])
 
+  // get post data
   useEffect(() => {
     fetch("/api/posts")
     .then(response => {
@@ -36,6 +42,7 @@ function App() {
   })
 }, [])
 
+  // check if logged in upon page refresh
   useEffect(() => {
     fetch("/api/check_session")
     .then(response => {
@@ -47,21 +54,25 @@ function App() {
     })
   }, [])
   
+  // add new user
   function handleAddUser(newUser) {
     const updatedUsers = [...users, newUser];
     setUsers(updatedUsers);
   }
 
+  // add new post
   function handleAddPost(newPost) {
     const updatedPosts = [...posts, newPost];
     setPosts(updatedPosts);
   }
 
+  // log in
   function handleLogin(user) {
       setCurrentUser(user);
       setLoggedIn(true);
   }
 
+  // log out
   function handleLogout() {
       setCurrentUser(null);
       setLoggedIn(false);   

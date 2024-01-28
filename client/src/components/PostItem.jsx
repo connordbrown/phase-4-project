@@ -1,7 +1,10 @@
 import React from 'react';
+// for routing to different page
 import { Link } from 'react-router-dom';
+// styling
 import './styling/PostItem.css';
 
+// displays basic post information and enables link to detailed information 
 function PostItem({ post }) {
 
     return (

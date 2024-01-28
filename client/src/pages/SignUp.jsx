@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUpForm from '../components/SignUpForm';
 
-// display description of application and any other useful information
+// allows user to sign up 
 function SignUp({ onAddUser }) {
     return (
         <div>

@@ -6,9 +6,12 @@ import Logout from '../components/Logout';
 import PostForm from '../components/PostForm';
 import '../App.css';
 
+// displays lists of posts and users, as well as login/logout feature
 function Home({ users, posts, currentUser, loggedIn, onLogin, onLogout, onPost }) {
+    // state for post form rendering
     const [postFormVisible, setPostFormVisible] = useState(false);
 
+    // change post form visibility
     function handlePostFormVisible() {
         setPostFormVisible(!postFormVisible);
     }
