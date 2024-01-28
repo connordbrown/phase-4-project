@@ -88,14 +88,14 @@ function App() {
       setLoggedIn(false);   
   }
 
-  // Show a loading state while user data are being fetched
+  // Show a loading state while users data are being fetched
   if (!usersLoaded) {
       return <div>Loading users...</div>;
   }
 
-      // Show a loading state while posts data are being fetched
+  // Show a loading state while posts data are being fetched
   if (!postsLoaded) {
-      return <div>Loading posdt...</div>
+      return <div>Loading posts...</div>
   }
 
   return (
