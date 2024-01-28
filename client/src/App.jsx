@@ -23,9 +23,9 @@ function App() {
     fetch("/api/users")
     .then(response => {
         if (response.ok) {
-          response.json().then(data => setUsers(data))
+          response.json().then(data => setUsers(data));
         } else {
-          response.json().then(err => console.log(err.error))
+          response.json().then(err => console.log(err.error));
         }
     })
   }, [])
@@ -35,9 +35,9 @@ function App() {
     fetch("/api/posts")
     .then(response => {
       if (response.ok) {
-          response.json().then(data => setPosts(data))
+          response.json().then(data => setPosts(data));
       } else {
-          response.json().then(err => console.log(err.error))
+          response.json().then(err => console.log(err.error));
       }
   })
 }, [])
@@ -47,9 +47,9 @@ function App() {
     fetch("/api/check_session")
     .then(response => {
         if (response.ok) {
-            response.json().then(user => handleLogin(user))
+            response.json().then(user => handleLogin(user));
         } else {
-            response.json().then(err => console.log(err.error))
+            response.json().then(err => console.log(err.error));
         }
     })
   }, [])
