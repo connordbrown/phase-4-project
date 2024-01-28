@@ -8,7 +8,7 @@ function CommentItem({ comment, loggedIn, currentUser, onUpdateCommentClick, onD
             <div>
                 <li className='comment' key={comment.id}>
                     <span className='comment-container'>
-                    {comment.user.username} : {comment.content} - {comment.timestamp}
+                    {comment.user.username}: {comment.content} - {comment.timestamp}
                     {loggedIn && comment.user_id === currentUser.id && (
                     <>
                         <button className='edit-button' onClick={() => onUpdateCommentClick(comment.id)}>edit</button>

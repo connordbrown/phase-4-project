@@ -40,10 +40,14 @@ function PostInfo({ loggedIn, currentUser }) {
             if (response.ok) {
                 response.json().then(data => {
                     setComments(data);
-                    setCommentsLoaded(data);
+                    setCommentsLoaded(true);
                 })
             } else {
-                response.json().then(err => console.log(err.error))
+                response.json().then(err => {
+                    console.log(err.error);
+                    setComments([]);
+                    setCommentsLoaded(true);
+                })
             }
         })
     }, [])
