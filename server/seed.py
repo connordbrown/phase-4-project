@@ -98,6 +98,5 @@ if __name__ == "__main__":
     db.session.add_all(sorted_comments)
 
 
-
     db.session.commit()
     print("Seeding complete.")

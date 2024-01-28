@@ -8,7 +8,7 @@ from models import User, Post, Comment
 
 @app.route('/')
 def home():
-    return 'Welcome to Post Maker!'
+    return 'Welcome to PostMaker!'
 
 
 ##### User Resources #####
@@ -16,7 +16,7 @@ class Users(Resource):
     def get(self):
       if users_dict_list := [u.to_dict() for u in User.query.all()]:
         return make_response(users_dict_list, 200)
-      return make_response({'error': '404: Not Found'}, 404)
+      return make_response({'error': '404: Users Not Found'}, 404)
     
     def post(self):
         username = request.json.get('username')
@@ -25,6 +25,7 @@ class Users(Resource):
         email = request.json.get('email')
         password = request.json.get('password')
 
+        # input validations
         if not username:
             return make_response({'error': '400: User must have a username'}, 400)
         if not age:
@@ -92,7 +93,7 @@ class Posts(Resource):
     def get(self):
         if posts_dict_list := [p.to_dict() for p in Post.query.all()]:
             return make_response(posts_dict_list, 200)
-        return make_response({'error': '404: Not Found'}, 404)
+        return make_response({'error': '404: Posts Not Found'}, 404)
     
     def post(self):
         # user must be logged in to make a Post
@@ -104,6 +105,7 @@ class Posts(Resource):
         # id from logged in user
         user_id = session.get('user_id')
 
+        # input validations
         if not title:
             return make_response({'error': '400: Invalid title'}, 400)
         if not content:
@@ -135,17 +137,17 @@ class PostByID(Resource):
     def get(self, id):
         if post := Post.query.filter(Post.id == id).first():
             return make_response(post.to_dict(), 200)
-        return make_response({'error': '404: Not Found'}, 404)
+        return make_response({'error': '404: Post Not Found'}, 404)
 api.add_resource(PostByID, '/posts/<int:id>')
 
 
 ##### Comment Resources #####
 class Comments(Resource):
     def get(self, post_id):
-        # filter to get correct comments and use rules to extract required information
+        # filter to get correct comments
         if comment_dict_list := [c.to_dict() for c in Comment.query.filter(Comment.post_id == post_id).all()]:
             return make_response(comment_dict_list, 200)
-        return make_response({'error': '404: Not Found'}, 404)
+        return make_response({'error': '404: Comments Not Found'}, 404)
 
     def post(self, post_id):
         # user must be logged in to make a comment
@@ -158,6 +160,7 @@ class Comments(Resource):
         # ensure correct post_id value by reassigning to current view_arg
         post_id = request.view_args.get('post_id')
 
+        # input validations
         if not content:
             return make_response({'error': '400: Invalid content'}, 400)
         if not user_id:
@@ -210,7 +213,7 @@ class CommentByID(Resource):
                 return make_response(comment.to_dict(), 200)
             except IntegrityError:
                 return make_response({'error': '422 Unprocessable Entity'})
-        return make_response({'error': 'Comment not found'}, 404)
+        return make_response({'error': '404: Comment not found'}, 404)
     
     def delete(self, id, post_id):
         # user must be logged in to delete a comment
