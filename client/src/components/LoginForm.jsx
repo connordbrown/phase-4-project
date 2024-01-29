@@ -5,6 +5,7 @@ import * as yup from 'yup';
 // styling
 import './styling/LoginForm.css';
 
+// allows user to log in
 function LoginForm( { onLogin }) {
     // loginError state
     const [loginError, setLoginError] = useState("");

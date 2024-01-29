@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 // routing
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// pages for routes
+// pages and navbar for routing
 import NavBar from './components/NavBar';
 import Home from './pages/home'; // interpreter has issue with casing
 import PostInfo from './pages/PostInfo';
@@ -11,6 +11,7 @@ import About from './pages/About';
 import SignUp from './pages/SignUp';
 import ErrorPage from './pages/ErrorPage';
 
+// main React application
 function App() {
   // states for main app data
   const [users, setUsers] = useState([]);

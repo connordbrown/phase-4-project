@@ -5,6 +5,7 @@ import * as yup from 'yup';
 // styling
 import './styling/CommentUpdateForm.css';
 
+// allows user to update a comment
 function CommentUpdateForm( { selectedComment, onUpdate }) {
     // updateError state
     const [updateError, setUpdateError] = useState("");

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // styling
 import './styling/Logout.css';
 
+// allows user to log out
 function Logout( { onLogout }) {
     // logoutError state
     const [logoutError, setLogoutError] = useState("");
