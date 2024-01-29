@@ -8,6 +8,15 @@ The front end is a React application that serves as a user-friendly test rig for
 
 ## Main Files
 
+**server:**
+
+- *instance* - contains app.db, the SQLite database used to run the API
+- *migrations* - contains the Flask migration versions of app.db and associated files
+- *app.py* - main server program; contains CRUD methods for the API endpoints for each database model: User, Post, Comment
+- *config.py* - contains configuration for the entire Flask back end
+- *models.py* - contains the models, relationships, and validations for each table in app.db
+- *seed.py* - clears the database, then seeds it with sample data
+
 **client:**
 
 - *main.jsx* - for creating/rendering React application
@@ -37,16 +46,6 @@ The front end is a React application that serves as a user-friendly test rig for
 - *Home.jsx* - displays list of posts, list of users, and login/logout feature
 - *PostInfo.jsx* - displays specific post and associated comments
 - *SignUp.jsx* - contains form for creating a new user
-
-**server:**
-
-- *instance* - contains app.db, the SQLite database used to run the API
-- *migrations* - contains the Flask migration versions of app.db and associated files
-- *app.py* - main server program; contains CRUD methods for the API endpoints for each database model: User, Post, Comment
-- *config.py* - contains configuration for the entire Flask back end
-- *models.py* - contains the models, relationships, and validations for each table in app.db
-- *seed.py* - clears the database, then seeds it with sample data
-
 
 ## Operation
 
@@ -96,15 +95,15 @@ npm run dev
 
 The RESTful Flask API contains the following endpoints for http://127.0.0.1:5555:
 
-*/* - Home
-*/users* - Users resource (GET, POST)
-*/login* - Login resource (POST)
-*/logout* - Logout resource (DELETE)
-*/check_session* - Check if user logged in (GET)
-*/posts* - Posts resource (GET, POST)
-*/posts/:post_id* - Specific post resource (GET)
-*/posts/:post_id/comments* - All comments for a specific post (GET, POST)
-*/posts/:post_id/comments/:comment_id* - Specific comment for a specific post (PATCH, DELETE)
+ - */* - Home
+ - */users* - Users resource (GET, POST)
+ - */login* - Login resource (POST)
+ - */logout* - Logout resource (DELETE)
+ - */check_session* - Check if user logged in (GET)
+ - */posts* - Posts resource (GET, POST)
+ - */posts/:post_id* - Specific post resource (GET)
+ - */posts/:post_id/comments* - All comments for a specific post (GET, POST)
+ - */posts/:post_id/comments/:comment_id* - Specific comment for a specific post (PATCH, DELETE)
 
 All ID numbers are integers. The client makes requests using the prefix */api* before the specific endpoint.
 ---
