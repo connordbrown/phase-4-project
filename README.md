@@ -88,7 +88,7 @@ npm install
 ```
 Then, run the React app in the browser:
 ```bash
-npm run dev
+npm run dev --prefix client
 ```
 
 ## Usage
