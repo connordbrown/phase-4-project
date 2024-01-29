@@ -92,6 +92,8 @@ npm run dev
 
 ## Usage
 
+**Front End:**
+
 1. Home: 
     - When the application first loads, the user will see the Home page. It contains: a navigation bar, which allows the user to move between different features and pages, a list of posts, which any user can view and a logged in user can contribute to, a list of users, which anyone can join using the SignUp page, and a login/logout feature, which signed-up users can use. When a user clicks on one of the posts, the app takes the user to that post's page.
 
@@ -103,6 +105,22 @@ npm run dev
 
 4. SignUp:
     - A form for signing up for the application. Once submitted, the new user can log in and make posts and comments.
+
+**Back End:**
+
+The RESTful Flask API contains the following endpoints for http://127.0.0.1:5555:
+
+*/* - Home
+*/users* - Users resource (GET, POST)
+*/login* - Login resource (POST)
+*/logout* - Logout resource (DELETE)
+*/check_session* - Check if user logged in (GET)
+*/posts* - Posts resource (GET, POST)
+*/posts/:post_id* - Specific post resource (GET)
+*/posts/:post_id/comments* - All comments for a specific post (GET, POST)
+*/posts/:post_id/comments/:comment_id* - Specific comment for a specific post (PATCH, DELETE)
+
+All ID numbers are integers. The client makes requests using the prefix */api* before the specific endpoint.
 
 ## Contributing
 
