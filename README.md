@@ -77,7 +77,9 @@ Finally, run the server:
 ```bash
 python server/app.py
 ```
+
 ---
+
 **Front End:**
 
 In a separate command line window from the back end, install dependencies:
@@ -106,7 +108,9 @@ The RESTful Flask API contains the following endpoints for http://127.0.0.1:5555
  - */posts/:post_id/comments/:comment_id* - Specific comment for a specific post (PATCH, DELETE)
 
 All ID numbers are integers. The client makes requests using the prefix */api* before the specific endpoint.
+
 ---
+
 **Front End:**
 
 1. Home: 
