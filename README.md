@@ -4,7 +4,7 @@ PostMaker is a Full Stack React-Flask web application for making posts and comme
 
 The back end is a RESTful API that uses a SQLite database to store three tables: users, posts, and comments. The database contains one many-to-many relationship, and three one-to-many relationships: a user has many posts through comments, a user has many comments, a post has many comments, and a user has many posts. Currently, the application contains Create and Read methods for both users and posts, and full CRUD (Create, Read, Update, and Delete) methods available for comments. The front end makes interaction with the database simple and straightforward.
 
-The front end is a React application that serves as a test rig for the back end.
+The front end is a React application that serves as a user-friendly test rig for the back end.
 
 ## Main Files
 
@@ -93,17 +93,16 @@ npm run dev
 ## Usage
 
 1. Home: 
-    - When the application first loads, the user will see the Home page.
+    - When the application first loads, the user will see the Home page. It contains: a navigation bar, which allows the user to move between different features and pages, a list of posts, which any user can view and a logged in user can contribute to, a list of users, which anyone can join using the SignUp page, and a login/logout feature, which signed-up users can use. When a user clicks on one of the posts, the app takes the user to that post's page.
 
 2. About: 
     - When the user clicks on the About button on the nav bar, the page will display a description of the application.
 
 3. PostInfo: 
-    - pass
+    - The page of a specific post. All users can view the specific post and its comments. If logged in, users can make, update, and delete their own comments.
 
 4. SignUp:
-    - pass
-
+    - A form for signing up for the application. Once submitted, the new user can log in and make posts and comments.
 
 ## Contributing
 
