@@ -92,20 +92,6 @@ npm run dev
 
 ## Usage
 
-**Front End:**
-
-1. Home: 
-    - When the application first loads, the user will see the Home page. It contains: a navigation bar, which allows the user to move between different features and pages, a list of posts, which any user can view and a logged in user can contribute to, a list of users, which anyone can join using the SignUp page, and a login/logout feature, which signed-up users can use. When a user clicks on one of the posts, the app takes the user to that post's page.
-
-2. About: 
-    - When the user clicks on the About button on the nav bar, the page will display a description of the application.
-
-3. PostInfo: 
-    - The page of a specific post. All users can view the specific post and its comments. If logged in, users can make, update, and delete their own comments.
-
-4. SignUp:
-    - A form for signing up for the application. Once submitted, the new user can log in and make posts and comments.
-
 **Back End:**
 
 The RESTful Flask API contains the following endpoints for http://127.0.0.1:5555:
@@ -121,6 +107,20 @@ The RESTful Flask API contains the following endpoints for http://127.0.0.1:5555
 */posts/:post_id/comments/:comment_id* - Specific comment for a specific post (PATCH, DELETE)
 
 All ID numbers are integers. The client makes requests using the prefix */api* before the specific endpoint.
+---
+**Front End:**
+
+1. Home: 
+    - When the application first loads, the user will see the Home page. It contains: a navigation bar, which allows the user to move between different features and pages, a list of posts, which any user can view and a logged in user can contribute to, a list of users, which anyone can join using the SignUp page, and a login/logout feature, which signed-up users can use. When a user clicks on one of the posts, the app takes the user to that post's page.
+
+2. About: 
+    - When the user clicks on the About button on the nav bar, the page will display a description of the application.
+
+3. PostInfo: 
+    - The page of a specific post. All users can view the specific post and its comments. If logged in, users can make, update, and delete their own comments.
+
+4. SignUp:
+    - A form for signing up for the application. Once submitted, the new user can log in and make posts and comments.
 
 ## Contributing
 
