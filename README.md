@@ -38,7 +38,7 @@ The front end is a React application that serves as a user-friendly test rig for
 - *PostInfo.jsx* - displays specific post and associated comments
 - *SignUp.jsx* - contains form for creating a new user
 
-**server**
+**server:**
 
 - *instance* - contains app.db, the SQLite database used to run the API
 - *migrations* - contains the Flask migration versions of app.db and associated files
@@ -50,7 +50,7 @@ The front end is a React application that serves as a user-friendly test rig for
 
 ## Operation
 
-**Back End**
+**Back End:**
 
 This application uses Python 3.9. It has dependencies that require a virtual environment. If the virtual environment is not already set up, use the following command:
 ```bash
@@ -79,7 +79,7 @@ Finally, run the server:
 python server/app.py
 ```
 ---
-**Front End**
+**Front End:**
 
 In a separate command line window from the back end, install dependencies:
 ```bash
