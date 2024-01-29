@@ -78,7 +78,7 @@ Finally, run the server:
 ```bash
 python server/app.py
 ```
-
+---
 **Front End**
 
 In a separate command line window from the back end, install dependencies:
