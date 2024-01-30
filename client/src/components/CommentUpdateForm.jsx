@@ -10,7 +10,7 @@ function CommentUpdateForm( { selectedComment, onUpdate }) {
     // updateError state
     const [updateError, setUpdateError] = useState("");
 
-    // error in response disappears after time interval
+    // error message in response disappears after time interval
     setTimeout(() => {
         setUpdateError("");
     }, 5000);

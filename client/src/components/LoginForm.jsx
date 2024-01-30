@@ -10,7 +10,7 @@ function LoginForm( { onLogin }) {
     // loginError state
     const [loginError, setLoginError] = useState("");
 
-    // error in response disappears after time interval
+    // error message in response disappears after time interval
     setTimeout(() => {
         setLoginError("");
     }, 4000);

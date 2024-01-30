@@ -11,7 +11,7 @@ function PostForm( { onPost }) {
     // postError state
     const [postError, setPostError] = useState("");
 
-    // error in response disappears after time interval
+    // error message in response disappears after time interval
     setTimeout(() => {
         setPostError("");
     }, 5000);

@@ -7,10 +7,17 @@ import './styling/SignUpForm.css';
 
 // allows user to sign up for app (create new user)
 function SignUpForm( { onAddUser }) {
+    // userSuccess state
+    const [userSuccess, setUserSuccess] = useState("");
     // userError state
     const [userError, setUserError] = useState("");
 
-    // error in response disappears after time interval
+    // success message in response disappears after time interval
+    setTimeout(() => {
+        setUserSuccess("");
+    }, 5000);
+
+    // error message in response disappears after time interval
     setTimeout(() => {
         setUserError("");
     }, 5000);
@@ -41,7 +48,10 @@ function SignUpForm( { onAddUser }) {
             })
             .then(response => {
                 if (response.ok) {
-                    response.json().then(newUser => onAddUser(newUser));
+                    response.json().then(newUser => {
+                        onAddUser(newUser);
+                        setUserSuccess("201: Signup successful")
+                    });
                 } else {
                     response.json().then(err => setPostError(err.error));
                 }
@@ -52,6 +62,7 @@ function SignUpForm( { onAddUser }) {
 
     return (
         <div>
+            {userSuccess ? <p style={{'color' : 'green'}}>{userSuccess}</p> : null}
             {userError ? <p style={{'color' : 'red'}}>{userError}</p> : null}
             <div className='form-container'>
                 <form id='signup-form' onSubmit={formik.handleSubmit}>

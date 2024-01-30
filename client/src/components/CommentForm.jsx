@@ -15,7 +15,7 @@ function CommentForm( { onComment }) {
     // get specific endpoint - useParams() returns string
     const params = useParams();
 
-    // error in response disappears after time interval
+    // error message in response disappears after time interval
     setTimeout(() => {
         setCommentError("");
     }, 5000);
