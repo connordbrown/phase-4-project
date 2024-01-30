@@ -4,7 +4,7 @@ PostMaker is a Full Stack React-Flask web application for making posts and comme
 
 The back end is a RESTful API that uses a SQLite database to store three tables: users, posts, and comments. The database contains one many-to-many relationship, and three one-to-many relationships: a user has many posts through comments, a user has many comments, a post has many comments, and a user has many posts. Currently, the application contains Create and Read methods for both users and posts, and full CRUD (Create, Read, Update, and Delete) methods available for comments. The front end makes interaction with the database simple and straightforward.
 
-The front end is a React application that serves as a user-friendly test rig for the back end.
+The front end is a React application, created with Vite, that serves as a user-friendly test rig for the back end.
 
 ## Main Files
 
